@@ -36,12 +36,11 @@
                 <form action="{% url 'register' %}" method="post" class="login100-form validate-form">
                     {% csrf_token %}
                     <span class="login100-form-title p-b-49">SignUp</span>
-                    <br>
                     <div>
                         {% for message in messages %}
                         <h3>{{ message }}</h3>
                         {% endfor %}
-                    </div><br>
+                    </div>
                     
                     <div class="wrap-input100 validate-input m-b-23">
                         <span class="label-input100">Name</span>
@@ -61,24 +60,23 @@
                         <span class="focus-input100" data-symbol="&#xf206;"></span>
                     </div>
 
+                    <div class="wrap-input100 validate-input m-b-23">
+                        <span class="label-input100">Phone</span>
+                        <input class="input100" type="number" name="phone_number" placeholder="Type your PhoneNumber"  required>
+                        <span class="focus-input100" data-symbol="&#xf206;"></span>
+                    </div>
+
                     <div class="wrap-input100 validate-input">
                         <span class="label-input100">Password</span>
                         <input class="input100" type="password" name="password1" placeholder="Type your password" required>
                         <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
+                    </div><br>
 
                     <div class="wrap-input100 validate-input">
                         <span class="label-input100">Confirm Password</span>
                         <input class="input100" type="password" name="password2" placeholder="Type your password again"  required>
                         <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-
-                    <div>
-                        {% for message in messages %}
-                        <h3>{{ message }}</h3>
-                        {% endfor %}
-                    </div>
-                    
+                    </div><br>
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>

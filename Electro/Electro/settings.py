@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
+    'phone_field',
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -95,10 +96,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'Electro.urls'
+AUTH_USER_MODEL = 'users_management.UserManage'
+AUTH_USER_MODEL = 'userapp.User' 
 
 TEMPLATES = [
     {
@@ -111,8 +113,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -126,7 +126,7 @@ WSGI_APPLICATION = 'Electro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Electro',
+        'NAME': 'E-Commerce',
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': '6254',
@@ -188,7 +188,9 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# AUTH_USER_MODEL = 'userapp.User'
