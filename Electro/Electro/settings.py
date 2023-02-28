@@ -99,8 +99,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Electro.urls'
-AUTH_USER_MODEL = 'users_management.UserManage'
-AUTH_USER_MODEL = 'userapp.User' 
+# AUTH_USER_MODEL = 'users_management.UserManage'
+# AUTH_USER_MODEL = 'userapp.User' 
 
 TEMPLATES = [
     {
@@ -126,7 +126,7 @@ WSGI_APPLICATION = 'Electro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'E-Commerce',
+        'NAME': 'Electro',
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': '6254',
