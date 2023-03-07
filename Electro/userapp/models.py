@@ -1,11 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
+# from phonenumber_field.modelfields import PhoneNumberField
 
-class Profile(models.Model):
-    user = models.OneToOneField(User ,on_delete=models.CASCADE)
-    mobile = models.CharField(max_length=14)
-    # otp = models.CharField(max_length=6)
+# class Contact(models.Model):
+#     phone = PhoneNumberField()
+
 
 class Products(models.Model):
 	img = models.ImageField(upload_to = 'pics')
@@ -17,16 +16,40 @@ class Products(models.Model):
 	def __str__(self):
 		return self.product_name
 
-# class member(models.Model):
-# 	first_name = models.CharField(max_length = 100)
-# 	username = models.CharField(max_length = 100)
-# 	email = models.EmailField(max_length = 100)
-# 	mobile = models.CharField(null=False, blank=False, unique=True, max_length = 14)
-# 	password = models.CharField(max_length = 100, default = '')
 
-# 	def __str__(self):
-# 		return self.username
 
+# class Client(models.Model, Importable):
+#     phone = PhoneNumberField(null=False, blank=False, unique=True)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User ,on_delete=models.CASCADE)
+    mobile = models.CharField(max_length=14)
+
+class member(models.Model):
+	first_name = models.CharField(max_length = 100)
+	username = models.CharField(max_length = 100)
+	email = models.EmailField(max_length = 100)
+	mobile = models.CharField(null=False, blank=False, unique=True, max_length = 14)
+	password = models.CharField(max_length = 100, default = '')
+
+	def __str__(self):
+		return self.username
+
+# class UserData(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     phone = models.BigIntegerField()
+
+#     USERNAME_FIELD = 'phone'
+#     REQUIRED_FIELDS = []
+#     @property
+#     def is_anonymous(self):
+#     	"""
+#     	Always return False. This is a way of comparing User objects to
+#     	anonymous users.
+#     	"""
+#     	return False
+#     if request.user.is_authenticated:
+#     	pass
 
 
 
@@ -146,4 +169,3 @@ class Products(models.Model):
 # # # class UserRegModel(models.Model):
 # # #     user = models.OneToOneField(User, on_delete=models.CASCADE)
 # # #     mobile = models.CharField(max_length=100)
-

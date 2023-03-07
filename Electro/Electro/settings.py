@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l4u&7@(qv-bti-egasy61%u#bhli&x2-eiu(^y(hsa5bxbf0f('
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,8 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'adminapp',
-    'vendorapp',
     'userapp',
     'django.contrib.sites',
     'allauth',
@@ -52,7 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
-    'phone_field',
+    'phonenumber_field',
+
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -100,7 +100,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Electro.urls'
 # AUTH_USER_MODEL = 'users_management.UserManage'
-# AUTH_USER_MODEL = 'userapp.User' 
+# AUTH_USER_MODEL = 'userapp.UserData'
 
 TEMPLATES = [
     {
@@ -194,3 +194,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # AUTH_USER_MODEL = 'userapp.User'
+
+TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
