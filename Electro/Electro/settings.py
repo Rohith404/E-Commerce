@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY='django-insecure-l4u&7@(qv-bti-egasy61%u#bhli&x2-eiu(^y(hsa5bxbf0f('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -194,9 +194,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # AUTH_USER_MODEL = 'userapp.User'
-
-TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
-TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
