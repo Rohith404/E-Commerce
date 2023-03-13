@@ -24,6 +24,10 @@ class Products(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User ,on_delete=models.CASCADE)
     mobile = models.CharField(max_length=14)
+    forget_password_token = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.mobile
 
 class member(models.Model):
 	first_name = models.CharField(max_length = 100)

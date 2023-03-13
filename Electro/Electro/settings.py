@@ -105,7 +105,7 @@ ROOT_URLCONF = 'Electro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -197,3 +197,14 @@ LOGOUT_REDIRECT_URL = '/'
 
 TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'emailforprojects404@gmail.com'
+# EMAIL_HOST_PASSWORD = 'rjrihkqbynbcyplw'
+# EMAIL_HOST_PASSWORD = 'bgrflyzpwzkcizqr'
+# EMAIL_HOST_PASSWORD = 'vcvhfeqcqqqquieu'
+EMAIL_HOST_PASSWORD = 'muyeijdsyavpjbsp'
