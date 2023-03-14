@@ -135,3 +135,13 @@ def login(request):
 def logout(request):
 	auth.logout(request)
 	return redirect('/')
+
+def mobile(request):
+    pros = Products.objects.all()
+    return render(request, 'mobile.html', {'pros':pros})
+
+def generatecode(self):
+    pass
+
+def laptop():
+    return render(request, 'laptop.html')

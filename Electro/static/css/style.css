@@ -2771,4 +2771,61 @@ iframe {
 
 .username {
   text: white;
-} 
+}
+
+.top-nav ul li a.link-kumya.active {
+    background: #FF5722;
+  color: #fff;
+}
+
+.link-kumya {
+  overflow: hidden;
+}
+
+.link-kumya:hover {
+  color: #fff;
+}
+
+.link-kumya::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: -2px;
+  z-index: 1;
+  background: #FF5722;
+  -webkit-transform: translate3d(101%,0,0);
+  transform: translate3d(101%,0,0);
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.link-kumya:hover::after {
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.link-kumya span {
+  position: relative;
+  z-index: 9999;
+}
+
+.link-kumya span::before {
+  content: attr(data-letters);
+  position: absolute;
+  color: #fff;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0%;
+  -webkit-transition: width 0.5s;
+  transition: width 0.5s;
+  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.link-kumya:hover span::before {
+  width: 100%;

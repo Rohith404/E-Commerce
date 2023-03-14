@@ -8,4 +8,6 @@ urlpatterns = [
 	path("logout",views.logout, name = "logout"),
     path('forget-password/' , views.ForgetPassword , name="forget-password"),
     path('change-password/<token>/' , views.ChangePassword , name="change-password"),
+    path("mobile", views.mobile, name = "mobile"),
+    path("laptop", views.laptop, name = "laptop"),
 ]
