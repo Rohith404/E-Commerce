@@ -194,7 +194,6 @@
 		</nav>
 		<!-- /NAVIGATION -->
 
-
 		<!-- Products tab & slick -->
 					<div class="col-md-12">
 						<div class="row">
@@ -203,19 +202,19 @@
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
 										<!-- product -->
-										{% for mob in mobs %}
+										{% for gad in gads %}
 										<div class="product">
 											<div class="product-img">
-												<img src="{{ mob.img.url }}" width="450" height="280" alt="">
+												<img src="{{ gad.img.url }}" width="450" height="280" alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span>
 													<span class="new">NEW</span>
 												</div>
 											</div>
 											<div class="product-body">
-												<p class="product-category">{{ mob.brand }}</p>
-												<h3 class="product-name"><a href="#">{{ mob.model_name }}</a></h3>
-												<h4 class="product-price">${{ mob.price }}</h4>
+												<p class="product-category">{{ gad.category }}</p>
+												<h3 class="product-name"><a href="#">{{ gad.model_name }}</a></h3>
+												<h4 class="product-price">${{ gad.price }}</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>

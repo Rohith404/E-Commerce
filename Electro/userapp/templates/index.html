@@ -171,16 +171,18 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li><a href="#" class="dropdown-toggle link-kumya" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span data-letters="Category">Category</span><span class="caret"></span></a>
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="#product-section">New Products</a></li>
+						<li><a href="#hot-deal">Hot Deals</a></li>
+						<li><a href="#top-selling-section">Top Selling</a></li>
+						<li><a href="#newsletter">Contact</a></li>
+						<li><a href="#about-section">About</a></li>
+						<li><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span data-letters="Category">Category</span><span class="caret"></span></a>
 							<ul class="dropdown-menu"> 
-								<li><a href="mobile" class="link-kumya active"><span data-letters="Mobile">Mobile</span></a></li>
-								<li><a href="laptop" class="link-kumya"><span data-letters="Laptops">Laptops</span></a></li>
+								<li><a href="mobile"><span data-letters="Mobile">Mobile</span></a></li>
+								<li><a href="laptop"><span data-letters="Laptops">Laptops</span></a></li>
+								<li><a href="{% url 'cameras' %}"><span data-letters="Cameras">Cameras</span></a></li>
+								<li><a href="{% url 'gadgets' %}"><span data-letters="Gadgets">Gadgets</span></a></li>
 							</ul>
 						</li>
 					</ul>
@@ -247,7 +249,7 @@
 		<!-- /SECTION -->
 
 		<!-- SECTION -->
-		<div class="section">
+		<div id="product-section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -280,84 +282,7 @@
 										{% for pro in pros %}
 										<div class="product">
 											<div class="product-img">
-												<img src="{{ pro.img.url }}" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">{{ pro.category }}</p>
-												<h3 class="product-name"><a href="#">{{ pro.product_name }}</a></h3>
-												<h4 class="product-price">${{ pro.price1 }} <del class="product-old-price">${{ pro.price }}</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										{% endfor %}
-										<!-- /product -->
-									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
-								</div>
-								<!-- /tab -->
-							</div>
-						</div>
-					</div>
-					<!-- Products tab & slick -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
-
-		<!-- SECTION -->
-		<div class="section" id="Mobile-section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-
-					<!-- section title -->
-					<div class="col-md-12">
-						<div class="section-title">
-							<h3 class="title">New Products</h3>
-							<div class="section-nav">
-								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab1">Accessories</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /section title -->
-
-					<!-- Products tab & slick -->
-					<div class="col-md-12">
-						<div class="row">
-							<div class="products-tabs">
-								<!-- tab -->
-								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-1">
-										<!-- product -->
-										{% for pro in pros %}
-										<div class="product">
-											<div class="product-img">
-												<img src="{{ pro.img.url }}" alt="">
+												<img src="{{ pro.img.url }}" width="450" height="280" alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span>
 													<span class="new">NEW</span>
@@ -447,7 +372,7 @@
 		<!-- /HOT DEAL SECTION -->
 
 		<!-- SECTION -->
-		<div class="section">
+		<div id="top-selling-section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -968,7 +893,7 @@
 		<!-- FOOTER -->
 		<footer id="footer">
 			<!-- top footer -->
-			<div class="section">
+			<div id="about-section">
 				<!-- container -->
 				<div class="container">
 					<!-- row -->

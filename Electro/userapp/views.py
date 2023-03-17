@@ -137,11 +137,17 @@ def logout(request):
 	return redirect('/')
 
 def mobile(request):
-    pros = Products.objects.all()
-    return render(request, 'mobile.html', {'pros':pros})
+    mobs = Mobile.objects.all()
+    return render(request, 'mobile.html', {'mobs':mobs})
 
-def generatecode(self):
-    pass
+def laptop(request):
+    laps = Laptop.objects.all()
+    return render(request, 'laptop.html', {'laps':laps})
 
-def laptop():
-    return render(request, 'laptop.html')
+def cameras(request):
+    cams = Camera.objects.all()
+    return render(request, 'cameras.html', {'cams':cams})
+
+def gadgets(request):  
+    gads = Gadget.objects.all()
+    return render(request, 'gadgets.html', {'gads':gads})

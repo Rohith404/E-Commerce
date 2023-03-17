@@ -10,4 +10,6 @@ urlpatterns = [
     path('change-password/<token>/' , views.ChangePassword , name="change-password"),
     path("mobile", views.mobile, name = "mobile"),
     path("laptop", views.laptop, name = "laptop"),
+    path("cameras", views.cameras, name = "cameras"),
+    path("gadgets", views.gadgets, name = "gadgets"),
 ]
