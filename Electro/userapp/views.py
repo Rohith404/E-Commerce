@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from .helpers import send_forget_password_mail
 
-
 def register(request):
     if request.method == 'POST':
     	first_name = request.POST.get('first_name')
@@ -21,10 +20,6 @@ def register(request):
     		if Profile.objects.filter(mobile = mobile).exists():
     			messages.info(request, 'Mobile number already exists!')
     			return redirect('register')
-    		# check_profile = Profile.objects.filter(mobile = mobile).first()
-    		# if check_profile:
-    		# 	context = {'message' : 'mobile number is already registered!!!' , 'class' : 'danger' }
-    		# 	return render(request,'register.html' , context)
     		if User.objects.filter(username = username).exists():
     			messages.info(request,'Username already exists')
     			return redirect('register')
@@ -106,11 +101,8 @@ def ForgetPassword(request):
     return render(request , 'forget-password.html')
 
 def index(request):
-
-	pros = Products.objects.all()
-
-	return render(request, 'index.html', {'pros':pros})
-
+    pros = Product.objects.all()
+    return render(request, 'index.html', {'pros':pros})
 
 def login(request):
 	if request.method == 'POST':
@@ -136,18 +128,28 @@ def logout(request):
 	auth.logout(request)
 	return redirect('/')
 
+def product(request):
+    return render(request, 'product.html')
+
 def mobile(request):
-    mobs = Mobile.objects.all()
+    mobiles = Category.objects.get(category = 'Mobile')
+    mobs = Product.objects.filter(category = mobiles)
     return render(request, 'mobile.html', {'mobs':mobs})
 
 def laptop(request):
-    laps = Laptop.objects.all()
+    laptops = Category.objects.get(category = 'Laptops')
+    laps = Product.objects.filter(category=laptops)
     return render(request, 'laptop.html', {'laps':laps})
 
 def cameras(request):
-    cams = Camera.objects.all()
+    camera = Category.objects.get(category = 'Camera')
+    cams = Product.objects.filter(category = camera)
     return render(request, 'cameras.html', {'cams':cams})
 
 def gadgets(request):  
-    gads = Gadget.objects.all()
+    gadget = Category.objects.get(category = 'Gadgets')
+    gads = Product.objects.filter(category = gadget)
     return render(request, 'gadgets.html', {'gads':gads})
+
+def cart(request):
+    return render(request, 'cart.html')

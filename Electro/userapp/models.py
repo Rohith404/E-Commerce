@@ -1,52 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Mobile(models.Model):
-	img = models.ImageField(upload_to = 'pics')
-	brand = models.CharField(max_length = 100)
-	model_name = models.CharField(max_length = 100)
-	price = models.IntegerField()
-
-	def __str__(self):
-		return self.model_name
-
-class Laptop(models.Model):
-	img = models.ImageField(upload_to = 'pics')
-	brand = models.CharField(max_length = 100)
-	model_name = models.CharField(max_length = 100)
-	price = models.IntegerField()
-
-	def __str__(self):
-		return self.model_name
-
-class Camera(models.Model):
-	img = models.ImageField(upload_to = 'pics')
-	brand = models.CharField(max_length = 100)
-	model_name = models.CharField(max_length = 100)
-	price = models.IntegerField()
-
-	def __str__(self):
-		return self.model_name
-
-class Gadget(models.Model):
-	img = models.ImageField(upload_to = 'pics')
-	category = models.CharField(max_length = 100)
-	model_name = models.CharField(max_length = 100)
-	price = models.IntegerField()
-
-	def __str__(self):
-		return self.model_name
-
-class Products(models.Model):
-	img = models.ImageField(upload_to = 'pics')
-	category = models.CharField(max_length = 100)
-	product_name = models.CharField(max_length = 100)
-	price = models.IntegerField()
-	price1 = models.IntegerField()
-
-	def __str__(self):
-		return self.product_name
-
 class Profile(models.Model):
     user = models.OneToOneField(User ,on_delete=models.CASCADE)
     mobile = models.CharField(max_length=14)
@@ -55,12 +9,30 @@ class Profile(models.Model):
     def __str__(self):
         return self.mobile
 
-class member(models.Model):
-	first_name = models.CharField(max_length = 100)
-	username = models.CharField(max_length = 100)
-	email = models.EmailField(max_length = 100)
-	mobile = models.CharField(null=False, blank=False, unique=True, max_length = 14)
-	password = models.CharField(max_length = 100, default = '')
+class Category(models.Model):
+	category = models.CharField(max_length = 100, blank = False, null = False)
 
 	def __str__(self):
-		return self.username
+		return self.category
+
+class Product(models.Model):
+	category = models.ForeignKey(Category, on_delete = models.CASCADE)
+	img = models.ImageField(upload_to = 'pics')
+	product_name = models.CharField(max_length = 100)
+	quantity = models.IntegerField(null = False, blank = False, default = '1')
+	original_price = models.IntegerField()
+	offer_price = models.IntegerField()
+
+	def __str__(self):
+		return self.product_name
+
+class Cart(models.Model):
+	user = models.ForeignKey(User, on_delete = models.CASCADE)
+	product = models.ForeignKey(Product, on_delete = models.CASCADE)
+	quantity = models.IntegerField(null = False, blank = False)
+	created_at = models.DateTimeField(auto_now_add = True)
+
+
+class member(models.Model):
+	name = models.CharField(max_length = 100)
+

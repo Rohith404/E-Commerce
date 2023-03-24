@@ -103,43 +103,9 @@
 								<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<a href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i></a>
+										<a href="{% url 'cart' %}"><span>Your Cart</span></a>
 									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="{% static 'img/product01.png' %}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="{% static 'img/product02.png' %}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
 								</div>
 								<!-- /Cart -->
 
@@ -172,19 +138,10 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="/">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
 						<li><a href="{% url 'laptop' %}">Laptops</a></li>
 						<li><a href="{% url 'mobile' %}">Mobiles</a></li>
 						<li><a href="{% url 'cameras' %}">Cameras</a></li>
 						<li><a href="{% url 'gadgets' %}">Gadgets</a></li>
-						<li><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span data-letters="Category">Category</span><span class="caret"></span></a>
-							<ul class="dropdown-menu"> 
-								<li><a href="mobile"><span data-letters="Mobile">Mobile</span></a></li>
-								<li><a href="laptop"><span data-letters="Laptops">Laptops</span></a></li>
-								<li><a href="{% url 'cameras' %}"><span data-letters="Cameras">Cameras</span></a></li>
-								<li><a href="{% url 'gadgets' %}"><span data-letters="Gadgets">Gadgets</span></a></li>
-							</ul>
-						</li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -193,8 +150,9 @@
 			<!-- /container -->
 		</nav>
 		<!-- /NAVIGATION -->
-
+		
 		<!-- Products tab & slick -->
+				<section>
 					<div class="col-md-12">
 						<div class="row">
 							<div class="products-tabs">
@@ -212,9 +170,9 @@
 												</div>
 											</div>
 											<div class="product-body">
-												<p class="product-category">{{ lap.brand }}</p>
-												<h3 class="product-name"><a href="#">{{ lap.model_name }}</a></h3>
-												<h4 class="product-price">${{ lap.price }}</h4>
+												<p class="product-category">{{ lap.category }}</p>
+												<h3 class="product-name"><a href="#">{{ lap.product_name }}</a></h3>
+												<h4 class="product-price">${{ lap.offer_price }}<del class="product-old-price"> ${{ lap.original_price }}</del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -240,15 +198,11 @@
 							</div>
 						</div>
 					</div>
+				</section>
+				<br><br><br><br><br><br><br><br><br><br><br><br>
 					<!-- Products tab & slick -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
 		<!-- /SECTION -->
 		<br><br><br>
-
 		<!-- NEWSLETTER -->
 		<div id="newsletter" class="section">
 			<!-- container -->
@@ -256,27 +210,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
+						
 					</div>
 				</div>
 				<!-- /row -->

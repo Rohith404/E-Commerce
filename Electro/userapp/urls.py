@@ -12,4 +12,6 @@ urlpatterns = [
     path("laptop", views.laptop, name = "laptop"),
     path("cameras", views.cameras, name = "cameras"),
     path("gadgets", views.gadgets, name = "gadgets"),
+    path("cart", views.cart, name = "cart"),
+    path("product", views.product, name = "product"),
 ]
