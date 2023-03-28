@@ -18,13 +18,14 @@ class Category(models.Model):
 class Product(models.Model):
 	category = models.ForeignKey(Category, on_delete = models.CASCADE)
 	img = models.ImageField(upload_to = 'pics')
-	product_name = models.CharField(max_length = 100)
+	product = models.CharField(max_length = 150, default = '')
 	quantity = models.IntegerField(null = False, blank = False, default = '1')
+	description = models.CharField(max_length = 250, default = '')
 	original_price = models.IntegerField()
 	offer_price = models.IntegerField()
 
 	def __str__(self):
-		return self.product_name
+		return self.product
 
 class Cart(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE)

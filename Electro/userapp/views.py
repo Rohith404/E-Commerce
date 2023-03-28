@@ -101,8 +101,8 @@ def ForgetPassword(request):
     return render(request , 'forget-password.html')
 
 def index(request):
-    pros = Product.objects.all()
-    return render(request, 'index.html', {'pros':pros})
+    prod = Product.objects.all()
+    return render(request, 'index.html', {'prod':prod})
 
 def login(request):
 	if request.method == 'POST':
@@ -128,8 +128,24 @@ def logout(request):
 	auth.logout(request)
 	return redirect('/')
 
-def product(request):
-    return render(request, 'product.html')
+def productview(request, cate_category, prod_id):
+    if(Category.objects.filter(category = cate_category)):
+        if(Product.objects.filter(id = prod_id)):
+            prod = Product.objects.filter(id = prod_id).first
+            context = {'prod':prod}
+        else:
+            messages.error(request, "No such product found!")
+            return redirect('/')
+    else:
+        messages.error(request, "No such category found!")
+        return redirect('/')
+    return render(request, 'productview.html', context)
+
+def checkout(request):
+    return render(request, 'checkout.html')
+
+def store(request):
+    return render(request, 'store.html')
 
 def mobile(request):
     mobiles = Category.objects.get(category = 'Mobile')
