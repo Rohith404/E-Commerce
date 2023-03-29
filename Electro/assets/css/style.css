@@ -2830,7 +2830,3 @@ iframe {
 .link-kumya:hover span::before {
   width: 100%;*/
 
-.badge alert-success {
-  text: white;
-  background-color: green;
-}

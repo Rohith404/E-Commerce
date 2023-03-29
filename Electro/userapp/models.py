@@ -32,6 +32,8 @@ class Cart(models.Model):
 	product = models.ForeignKey(Product, on_delete = models.CASCADE)
 	quantity = models.IntegerField(null = False, blank = False)
 	created_at = models.DateTimeField(auto_now_add = True)
+	completed = models.BooleanField(default = False)
+	session_id = models.CharField(max_length = 100, default = '')
 
 
 class member(models.Model):

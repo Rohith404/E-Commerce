@@ -28,6 +28,14 @@
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
 
+		<!-- Alertify css -->
+
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        
+        <!-- Alertify css -->
+
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -266,14 +274,16 @@
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 												</div>
-												<div class="product-btns">
+												<div class="product-btns quantity">
+													{% csrf_token %}
+													<input type="hidden" value="{{ prod.id }}" class="pros_id">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 													<button class="quick-view"><a href="{% url 'productview' pro.category.category pro.id %}"><i class="fa fa-eye"></i>
 													<span class="tooltipp">quick view</span></a></button>
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<button class="add-to-cart-btn addToCartBtn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 											</div>
 											</a>
 										</div>
@@ -559,6 +569,16 @@
 		<script src="{% static 'js/nouislider.min.js' %}"></script>
 		<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
+		<script src="{% static 'js/script.js' %}"></script>
+		<!-- Alertify js -->
+		<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script>
+            alertify.set('notifier','position', 'top-right');
+            {% for msg in messages %}
+                alertify.success('{{ msg }}');
+            {% endfor %}
+        </script>
 
 	</body>
 </html>

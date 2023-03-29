@@ -125,14 +125,16 @@ def login(request):
 
 
 def logout(request):
-	auth.logout(request)
-	return redirect('/')
+    auth.logout(request)
+    messages.success(request, 'Logout successfully')
+    return redirect('/')
 
 def productview(request, cate_category, prod_id):
     if(Category.objects.filter(category = cate_category)):
         if(Product.objects.filter(id = prod_id)):
             prod = Product.objects.filter(id = prod_id).first
-            context = {'prod':prod}
+            products = Product.objects.all()
+            context = {'prod':prod, 'products':products}
         else:
             messages.error(request, "No such product found!")
             return redirect('/')
@@ -169,3 +171,23 @@ def gadgets(request):
 
 def cart(request):
     return render(request, 'cart.html')
+
+def addtocart(request):
+    if request.method == 'POST':
+        pros_id = int(request.POST.get('product_id'))
+        prod_check = Product.objects.get(id = pros_id)
+
+        if(prod_check):
+            if(Cart.objects.filter(user = request.user.id, product_id = pros_id)):
+                return JsonResponse({'status':"Product already added to cart."})
+            else:
+                prod_qty = int(request.POST.get('quantity'))
+
+                if prod_check.quantity >= prod_qty:
+                    Cart.objects.create(user = request.user, product_id = pros_id, quantity = prod_qty)
+                    return JsonResponse({'status':"Product added successfully"})
+                else:
+                    return JsonResponse({'status':"Only "+ str(prod_check.quantity) +" quantity available"})
+        else:
+            return JsonResponse({'status':"No such product available"})
+    return redirect('/')
