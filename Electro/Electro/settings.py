@@ -205,3 +205,5 @@ EMAIL_HOST_USER = 'emailforprojects404@gmail.com'
 # EMAIL_HOST_PASSWORD = 'bgrflyzpwzkcizqr'
 # EMAIL_HOST_PASSWORD = 'vcvhfeqcqqqquieu'
 EMAIL_HOST_PASSWORD = 'muyeijdsyavpjbsp'
+
+# CART_SESSION_ID = 'cart'

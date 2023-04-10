@@ -8,7 +8,7 @@
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
-				<div class="row">
+				<div class="row product_data">
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
@@ -69,12 +69,12 @@
 							<div class="add-to-cart quantity">
 								{% csrf_token %}
 								<input type="hidden" value="{{ prod.id }}" class="pros_id">
-								<div class="qty-label">
+								<div class="qty-label quantity">
 									Qty
-									<div class="input-number product_qty">
-										<span class="qty-up decrement-but">+</span>
+									<div class="input-number quantity">
+										<span class="qty-up increment-btn">+</span>
 										<input type="number" class="form-control qty-input text-center" value="1">
-										<span class="qty-down increment-but">-</span>
+										<span class="qty-down decrement-btn">-</span>
 									</div>
 								</div>
 								<button class="add-to-cart-btn addToCartBtn"><i class="fa fa-shopping-cart"></i> add to cart</button>
@@ -87,8 +87,11 @@
 
 							<ul class="product-links">
 								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
+								<li><a href="{% url 'laptop' %}">Laptops</a></li>
+								<li><a href="{% url 'mobile' %}">Mobile</a></li>
+								<br>
+								<li><a href="{% url 'cameras' %}">Camera</a></li>
+								<li><a href="{% url 'gadgets' %}">Gadgets</a></li>
 							</ul>
 
 							<ul class="product-links">
@@ -325,7 +328,6 @@
 		<!-- /SECTION -->
 
 		<!-- Section -->
-		<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -377,9 +379,6 @@
 													<span class="tooltipp">quick view</span></a></button>
 												</div>
 											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn addToCartBtn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
 											</a>
 										</div>
 										{% endfor %}
@@ -399,7 +398,5 @@
 				<!-- /row -->
 			</div>
 			<!-- /container -->
-		</div>
-		<!-- /Section -->
 
 {% endblock content %}

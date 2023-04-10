@@ -43,6 +43,41 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+		<script type="text/javascript">
+
+	        function getCookie(name) {
+	            var cookieValue = null;
+	            if (document.cookie && document.cookie !== '') {
+	                var cookies = document.cookie.split(';');
+	                for (var i = 0; i < cookies.length; i++) {
+	                    var cookie = cookies[i].trim();
+	                    // Does this cookie string begin with the name we want?
+	                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+	                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                        break;
+	                    }
+	                }
+	            }
+	            return cookieValue;
+	        }
+
+	        function uuidv4() {
+	          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+	            return v.toString(16);
+	          });
+	        }
+
+	        let device = getCookie('device')
+
+	        if (device == null || device == undefined){
+	            device = uuidv4()
+	        }
+
+	        document.cookie ='device=' + device + ";domain=;path=/"
+
+    	</script>
+
     </head>
 	<body>
 		<!-- HEADER -->
@@ -111,7 +146,7 @@
 								<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<a href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i></a>
+										<a href="{% url 'cart' %}" ><i class="fa fa-shopping-cart"></i></a>
 										<a href="{% url 'cart' %}"><span>Your Cart</span></a>
 									</a>
 								</div>
@@ -253,7 +288,7 @@
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
 										<!-- product -->
-										{% for pro in prod %}
+										{% for pro in pros %}
 										<div class="product">
 											<a href="{% url 'productview' pro.category.category pro.id %}">
 											<div class="product-img">
@@ -276,14 +311,11 @@
 												</div>
 												<div class="product-btns quantity">
 													{% csrf_token %}
-													<input type="hidden" value="{{ prod.id }}" class="pros_id">
+													<input type="hidden" value="{{ prods.id }}" class="pros_id">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 													<button class="quick-view"><a href="{% url 'productview' pro.category.category pro.id %}"><i class="fa fa-eye"></i>
 													<span class="tooltipp">quick view</span></a></button>
 												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn addToCartBtn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 											</div>
 											</a>
 										</div>
@@ -381,7 +413,7 @@
 								<div id="tab2" class="tab-pane fade in active">
 									<div class="products-slick" data-nav="#slick-nav-2">
 										<!-- product -->
-										{% for pro in prod %}
+										{% for pro in pros %}
 										<div class="product">
 											<a href="{% url 'productview' pro.category.category pro.id %}">
 											<div class="product-img">
@@ -407,13 +439,10 @@
 													<button class="quick-view"><a href="{% url 'productview' pro.category.category pro.id %}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
 												</div>
 											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
 											</a>
-										</div>
 										{% endfor %}
 										<!-- /product -->
+										<br><br><br>
 									</div>
 									<div id="slick-nav-2" class="products-slick-nav"></div>
 								</div>
@@ -573,6 +602,7 @@
 		<!-- Alertify js -->
 		<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		
 		<script>
             alertify.set('notifier','position', 'top-right');
             {% for msg in messages %}

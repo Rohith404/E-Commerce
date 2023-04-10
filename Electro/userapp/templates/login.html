@@ -29,6 +29,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 <!--===============================================================================================-->
+
+    <!-- Alertify css -->
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        
+    <!-- Alertify css -->
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
 </head>
 <body>
     
@@ -128,6 +137,17 @@
     <script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
 <!--===============================================================================================-->
     <script src="{% static 'js/main.js' %}"></script>
+
+    <!-- Alertify js -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+            alertify.set('notifier','position', 'top-right');
+            {% for msg in messages %}
+                alertify.error('{{ msg }}');
+            {% endfor %}
+    </script>
 
 </body>
 </html>

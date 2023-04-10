@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from .helpers import send_forget_password_mail
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -18,13 +19,13 @@ def register(request):
     	password2 = request.POST.get('password2')
     	if password1 == password2:
     		if Profile.objects.filter(mobile = mobile).exists():
-    			messages.info(request, 'Mobile number already exists!')
+    			messages.error(request, 'Mobile number already exists!')
     			return redirect('register')
     		if User.objects.filter(username = username).exists():
-    			messages.info(request,'Username already exists')
+    			messages.error(request,'Username already exists')
     			return redirect('register')
     		if User.objects.filter(email = email).exists():
-    			messages.info(request,'Email already exists')
+    			messages.error(request,'Email already exists')
     			return redirect('register')
     		else:
     			user = User.objects.create_user(first_name = first_name, username = username, email = email, password = password1)
@@ -82,7 +83,7 @@ def ForgetPassword(request):
             username = request.POST.get('username')
             
             if not User.objects.filter(username=username).first():
-                messages.success(request, 'Not user found with this username.')
+                messages.error(request, 'No user found with this username.')
                 return redirect('/forget-password/')
             
             user_obj = User.objects.get(username = username)
@@ -101,8 +102,8 @@ def ForgetPassword(request):
     return render(request , 'forget-password.html')
 
 def index(request):
-    prod = Product.objects.all()
-    return render(request, 'index.html', {'prod':prod})
+    pros = Product.objects.all()
+    return render(request, 'index.html', {'pros':pros})
 
 def login(request):
 	if request.method == 'POST':
@@ -115,10 +116,10 @@ def login(request):
 			return redirect('/')
 		user_obj = User.objects.filter(username = username).first()
 		if user_obj is None:
-			messages.success(request, 'User not found.')
+			messages.error(request, 'User not found.')
 			return redirect('login')
 		else:
-			messages.info(request,'Invalid username or password!')
+			messages.error(request,'Invalid username or password!')
 			return redirect('login')
 	else:
 		return render(request,'login.html')
@@ -169,25 +170,49 @@ def gadgets(request):
     gads = Product.objects.filter(category = gadget)
     return render(request, 'gadgets.html', {'gads':gads})
 
+@login_required(login_url = 'login')
 def cart(request):
-    return render(request, 'cart.html')
+    cart = Cart.objects.filter(user = request.user)
+    return render(request, 'cart.html', {'cart':cart})
 
 def addtocart(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            pros_id = int(request.POST.get('product_id'))
+            prod_check = Product.objects.get(id = pros_id)
+
+            if(prod_check):
+                if(Cart.objects.filter(user = request.user.id, product_id = pros_id)):
+                    return JsonResponse({'status':"Product already in cart."})
+                else:
+                    prod_qty = int(request.POST.get('quantity'))
+
+                    if prod_check.quantity >= prod_qty:
+                        Cart.objects.create(user = request.user, product_id = pros_id, quantity = prod_qty)
+                        return JsonResponse({'status':"Product added successfully"})
+                    else:
+                        return JsonResponse({'status':"Only "+ str(prod_check.quantity) +" quantity available"})
+            else:
+                return JsonResponse({'status':"No such product available"})
+        return redirect('/')
+    else:
+        return JsonResponse({'status':"Login to continue"})
+
+def updatecart(request):
     if request.method == 'POST':
         pros_id = int(request.POST.get('product_id'))
-        prod_check = Product.objects.get(id = pros_id)
+        if(Cart.objects.filter(user = request.user, product_id = pros_id)):
+            prod_qty = int(request.POST.get('quantity'))
+            cart = Cart.objects.get(product_id = pros_id, user = request.user)
+            cart.quantity = prod_qty
+            cart.save()
+    return redirect('/')
 
-        if(prod_check):
-            if(Cart.objects.filter(user = request.user.id, product_id = pros_id)):
-                return JsonResponse({'status':"Product already added to cart."})
-            else:
-                prod_qty = int(request.POST.get('quantity'))
-
-                if prod_check.quantity >= prod_qty:
-                    Cart.objects.create(user = request.user, product_id = pros_id, quantity = prod_qty)
-                    return JsonResponse({'status':"Product added successfully"})
-                else:
-                    return JsonResponse({'status':"Only "+ str(prod_check.quantity) +" quantity available"})
-        else:
-            return JsonResponse({'status':"No such product available"})
+def deletecartitem(request):
+    if request.method == 'POST':
+        pros_id = int(request.POST.get('product_id'))
+        if(Cart.objects.filter(user = request.user, product_id = pros_id)):
+            item = Cart.objects.get(product_id = pros_id, user = request.user)
+            item.delete()
+            return JsonResponse({'status': "Item Deleted"})
     return redirect('/')

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+# import uuid
 
 class Profile(models.Model):
     user = models.OneToOneField(User ,on_delete=models.CASCADE)
@@ -32,9 +33,19 @@ class Cart(models.Model):
 	product = models.ForeignKey(Product, on_delete = models.CASCADE)
 	quantity = models.IntegerField(null = False, blank = False)
 	created_at = models.DateTimeField(auto_now_add = True)
-	completed = models.BooleanField(default = False)
-	session_id = models.CharField(max_length = 100, default = '')
 
+class Customer(models.Model):
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    email = models.CharField(max_length=200, null=True, blank=True)
+    device = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        if self.name:
+            name = self.name
+        else:
+            name = self.device
+        return str(name)
 
 class member(models.Model):
 	name = models.CharField(max_length = 100)
