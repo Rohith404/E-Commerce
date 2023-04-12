@@ -34,6 +34,11 @@ class Cart(models.Model):
 	quantity = models.IntegerField(null = False, blank = False)
 	created_at = models.DateTimeField(auto_now_add = True)
 
+class Liked(models.Model):
+	user = models.ForeignKey(User, on_delete = models.CASCADE)
+	product = models.ForeignKey(Product, on_delete = models.CASCADE)
+	created_at = models.DateTimeField(auto_now_add = True)
+
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -46,6 +51,8 @@ class Customer(models.Model):
         else:
             name = self.device
         return str(name)
+
+
 
 class member(models.Model):
 	name = models.CharField(max_length = 100)

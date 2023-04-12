@@ -2829,3 +2829,13 @@ iframe {
 
 .link-kumya:hover span::before {
   width: 100%;*/
+
+.liked{
+    background-color:lightgreen ;
+    width: 60%;
+    border-radius: 25px;
+    border: 2px solid green;
+    padding: 10px; 
+    height: 1%;
+    font-weight: bold;
+}

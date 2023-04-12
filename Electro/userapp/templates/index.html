@@ -135,10 +135,9 @@
 							<div class="header-ctn">
 								<!-- Wishlist -->
 								<div>
-									<a href="#">
+									<a href="{% url 'wishlist' %}">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
-										<div class="qty">2</div>
 									</a>
 								</div>
 								<!-- /Wishlist -->
@@ -291,32 +290,25 @@
 										{% for pro in pros %}
 										<div class="product">
 											<a href="{% url 'productview' pro.category.category pro.id %}">
-											<div class="product-img">
-												<img src="{{ pro.img.url }}" width="450" height="280" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
+												<div class="product-img">
+													<img src="{{ pro.img.url }}" width="450" height="280" alt="">
+													<div class="product-label">
+														<span class="sale">-30%</span>
+														<span class="new">NEW</span>
+													</div>
 												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">{{ pro.category }}</p>
-												<h3 class="product-name"><a href="{% url 'productview' pro.category.category pro.id %}">{{ pro.product }}</a></h3>
-												<h4 class="product-price">${{ pro.offer_price }}<del class="product-old-price"> ${{ pro.original_price }}</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
+												<div class="product-body">
+													<p class="product-category">{{ pro.category }}</p>
+													<h3 class="product-name"><a href="{% url 'productview' pro.category.category pro.id %}">{{ pro.product }}</a></h3>
+													<h4 class="product-price">${{ pro.offer_price }}<del class="product-old-price"> ${{ pro.original_price }}</del></h4>
+													<div class="product-rating">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div>
 												</div>
-												<div class="product-btns quantity">
-													{% csrf_token %}
-													<input type="hidden" value="{{ prods.id }}" class="pros_id">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="quick-view"><a href="{% url 'productview' pro.category.category pro.id %}"><i class="fa fa-eye"></i>
-													<span class="tooltipp">quick view</span></a></button>
-												</div>
-											</div>
 											</a>
 										</div>
 										{% endfor %}
@@ -434,10 +426,6 @@
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="quick-view"><a href="{% url 'productview' pro.category.category pro.id %}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
-												</div>
 											</div>
 											</a>
 										{% endfor %}
@@ -494,7 +482,7 @@
 			<!-- /container -->
 		</div>
 		<!-- /NEWSLETTER -->
-
+<br><br><br>
 		<!-- FOOTER -->
 		<footer id="footer">
 			<!-- top footer -->

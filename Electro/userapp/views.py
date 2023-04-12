@@ -216,3 +216,36 @@ def deletecartitem(request):
             item.delete()
             return JsonResponse({'status': "Item Deleted"})
     return redirect('/')
+
+@login_required(login_url = 'login')
+def wishlist(request):
+    wish = Liked.objects.filter(user = request.user)
+    return render(request, 'wishlist.html', {'wish':wish})
+
+def addtowishlist(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            pros_id = int(request.POST.get('product_id'))
+            prod_check = Product.objects.get(id = pros_id)
+
+            if(prod_check):
+                if(Liked.objects.filter(user = request.user.id, product_id = pros_id)):
+                    return JsonResponse({'status':"Product already in wishlist."})
+                else:
+                    Liked.objects.create(user = request.user, product_id = pros_id)
+                    return JsonResponse({'status':"Product added successfully"})
+            else:
+                return JsonResponse({'status': "No such product found!"})
+        else:
+            return JsonResponse({'status': "Login to continue"})
+    else:
+        return redirect('/')
+
+def deletewishitem(request):
+    if request.method == 'POST':
+        pros_id = int(request.POST.get('product_id'))
+        if(Liked.objects.filter(user = request.user, product_id = pros_id)):
+            item = Liked.objects.get(product_id = pros_id, user = request.user)
+            item.delete()
+            return JsonResponse({'status': "Item Deleted"})
+    return redirect('/')

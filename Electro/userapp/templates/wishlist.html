@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- SECTION -->
+		<div class = "product_data">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row product_data">
+					<u><h2 class="text-center">Wishlist</h2></u>
+					<br>
+					{% if wish %}
+
+							{% for prod in wish %}
+								<div class="row text-center product_data"><a href="{% url 'productview' prod.product.category.category prod.product.id %}">
+									<div class="col-md-1 my-auto">
+									</div>
+									<br>
+									<div class="col-md-2 my-auto">
+										<img src="{{ prod.product.img.url }}" height="70px" width="100px" >
+									</div>
+									<br>
+									<div class="col-md-2 my-auto">
+										<h6> {{ prod.product.product }} </h6>
+									</div>
+
+									<div class="col-md-1 my-auto">
+										<h4>$ {{ prod.product.offer_price }} </h4>
+									</div>
+									<div class="col-md-3 my-auto">
+										<button class="btn btn-success"><a href="{% url 'productview' prod.product.category.category prod.product.id %}"><i class="fa fa-eye"></i>  View Product</a></button>
+									</div>
+									<div class="col-md-2 my-auto">
+										<input type="hidden" class="pros_id" value="{{ prod.product_id }}">
+										{% csrf_token %}
+										<button name = "delete" class="btn btn-danger delete-wish-item"><i class="fa fa-trash"></i> Remove</button>			
+									</div>
+								</a>
+								</div>
+							{% endfor %}
+
+					{% else %}
+
+						<h4>Your Wishlist Is Empty</h4>
+
+					{% endif %}
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+{% endblock content %}

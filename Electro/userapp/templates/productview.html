@@ -80,11 +80,11 @@
 								<button class="add-to-cart-btn addToCartBtn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>
 
-							<ul class="product-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-							</ul>
 
+							{% csrf_token %}
+							<input type="hidden" value="{{ prod.id }}" class="pros_id">
+							<button class="liked addToWishList"><i class="fa fa-heart"></i> ADD TO WISHLIST</button>
+							
 							<ul class="product-links">
 								<li>Category:</li>
 								<li><a href="{% url 'laptop' %}">Laptops</a></li>
@@ -370,13 +370,6 @@
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns quantity">
-													{% csrf_token %}
-													<input type="hidden" value="{{ prod.id }}" class="pros_id">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="quick-view"><a href="{% url 'productview' pro.category.category pro.id %}"><i class="fa fa-eye"></i>
-													<span class="tooltipp">quick view</span></a></button>
 												</div>
 											</div>
 											</a>
