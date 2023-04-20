@@ -83,7 +83,10 @@
 
 							{% csrf_token %}
 							<input type="hidden" value="{{ prod.id }}" class="pros_id">
-							<button class="liked addToWishList"><i class="fa fa-heart"></i> ADD TO WISHLIST</button>
+							<button class="liked addToWishList"><i class="fa fa-heart"></i> Add To Wishlist</button>
+
+							<br><br>
+							<a href="{% url 'checkout' %}" class="btn btn-danger buy"> Buy Now </a>
 							
 							<ul class="product-links">
 								<li>Category:</li>

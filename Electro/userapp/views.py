@@ -144,12 +144,6 @@ def productview(request, cate_category, prod_id):
         return redirect('/')
     return render(request, 'productview.html', context)
 
-def checkout(request):
-    return render(request, 'checkout.html')
-
-def store(request):
-    return render(request, 'store.html')
-
 def mobile(request):
     mobiles = Category.objects.get(category = 'Mobile')
     mobs = Product.objects.filter(category = mobiles)
@@ -245,7 +239,20 @@ def deletewishitem(request):
     if request.method == 'POST':
         pros_id = int(request.POST.get('product_id'))
         if(Liked.objects.filter(user = request.user, product_id = pros_id)):
-            item = Liked.objects.get(product_id = pros_id, user = request.user)
-            item.delete()
+            cart = Liked.objects.get(product_id = pros_id, user = request.user)
+            cart.delete()
             return JsonResponse({'status': "Item Deleted"})
     return redirect('/')
+
+@login_required(login_url = 'login')
+def checkout(request):
+    rawcart = Cart.objects.filter(user = request.user)
+    for prod in rawcart:
+        if prod.quantity > prod.product.quantity:
+            Cart.objects.delete(id = prod.id)
+    cart = Cart.objects.filter(user = request.user)
+    total_price = 0
+    for prod in cart:
+        total_price = total_price + prod.product.offer_price * prod.quantity
+    context = {'cart' : cart, 'total_price' : total_price}
+    return render(request, 'checkout.html', context)

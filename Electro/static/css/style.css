@@ -2830,12 +2830,44 @@ iframe {
 .link-kumya:hover span::before {
   width: 100%;*/
 
-.liked{
+.liked {
     background-color:lightgreen ;
-    width: 60%;
+    width: 62.5%;
     border-radius: 25px;
     border: 2px solid green;
     padding: 10px; 
     height: 1%;
     font-weight: bold;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-weight: bold;
+}
+
+.buy {
+    background-color:#E31C1C;
+    width: 62.5%;
+    border-radius: 25px;
+    color : #FFF;
+    border: 2px solid green;
+    padding: 10px; 
+    height: 1%;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-weight: bold;
+}
+
+.check {
+    background-color:#D10024;
+    width: 60%;
+    border-radius: 25px;
+    border: 2px solid darkred;
+    padding: 10px; 
+    height: 1%;
+    font-weight: bold;
+}
+
+.wish {
+    text-transform: uppercase;
+    font-weight: 500;
+    color : #FFF;
 }

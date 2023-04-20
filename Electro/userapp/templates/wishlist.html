@@ -31,7 +31,7 @@
 										<h4>$ {{ prod.product.offer_price }} </h4>
 									</div>
 									<div class="col-md-3 my-auto">
-										<button class="btn btn-success"><a href="{% url 'productview' prod.product.category.category prod.product.id %}"><i class="fa fa-eye"></i>  View Product</a></button>
+										<a href="{% url 'productview' prod.product.category.category prod.product.id %}" class="btn btn-success wish"><i class="fa fa-eye"></i>  View Product</a>
 									</div>
 									<div class="col-md-2 my-auto">
 										<input type="hidden" class="pros_id" value="{{ prod.product_id }}">
