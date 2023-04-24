@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 from django.contrib import messages
@@ -134,8 +134,9 @@ def productview(request, cate_category, prod_id):
     if(Category.objects.filter(category = cate_category)):
         if(Product.objects.filter(id = prod_id)):
             prod = Product.objects.filter(id = prod_id).first
+            pros = Product.objects.all()
             products = Product.objects.all()
-            context = {'prod':prod, 'products':products}
+            context = {'prod':prod, 'products':products, 'pros':pros}
         else:
             messages.error(request, "No such product found!")
             return redirect('/')
@@ -256,3 +257,20 @@ def checkout(request):
         total_price = total_price + prod.product.offer_price * prod.quantity
     context = {'cart' : cart, 'total_price' : total_price}
     return render(request, 'checkout.html', context)
+
+@login_required(login_url = 'login')
+def buynow(request, prod_id):
+    if(Product.objects.filter(id = prod_id)):
+        prod = Product.objects.filter(id = prod_id).first()
+        price = 2
+        total = 0
+        total = total + prod.offer_price + price
+        if request.method == 'POST':
+            quantity = int(request.POST.get('quantity'))
+        else:
+            quantity = 1
+        context = {'prod' : prod, 'total' : total, 'quantity' : quantity}
+    else:
+        messages.error(request, "No such product found!")
+        return redirect('/')
+    return render(request, 'buynow.html', context)

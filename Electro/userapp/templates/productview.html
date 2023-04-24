@@ -73,7 +73,7 @@
 									Qty
 									<div class="input-number quantity">
 										<span class="qty-up increment-btn">+</span>
-										<input type="number" class="form-control qty-input text-center" value="1">
+										<input type="number"  min="1" name = "quantity" id = "quantity" class="form-control qty-input text-center" value="1">
 										<span class="qty-down decrement-btn">-</span>
 									</div>
 								</div>
@@ -86,8 +86,13 @@
 							<button class="liked addToWishList"><i class="fa fa-heart"></i> Add To Wishlist</button>
 
 							<br><br>
-							<a href="{% url 'checkout' %}" class="btn btn-danger buy"> Buy Now </a>
+							<form action="post" action="{% url 'buynow' prod.id %}">
+								{% csrf_token %}
+								<input type="hidden" value="{{ prod.id }}" class="pros_id">
+								<a href="{% url 'buynow' prod.id %}" class="btn btn-danger buy"> Buy Now </a>
+							</form>
 							
+
 							<ul class="product-links">
 								<li>Category:</li>
 								<li><a href="{% url 'laptop' %}">Laptops</a></li>
