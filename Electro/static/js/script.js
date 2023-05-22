@@ -131,4 +131,49 @@ $(document).ready(function () {
 		});
 	});
 
+	$('.buyBtn').click(function (e) {
+		e.preventDefault();
+
+		var product_id = $(this).closest('.product_data').find('.pros_id').val();
+		var quantity = $(this).closest('.product_data').find('.qty-input').val();
+		var token = $('input[name = csrfmiddlewaretoken]').val();
+
+		$.ajax({
+			method: "POST",
+			url: "/buynow",
+			data:{
+				'product_id':product_id,
+				'quantity':quantity,
+				csrfmiddlewaretoken: token
+			},
+			success: function(response){
+				console.log(response)
+				window.location.href('buynow')
+			}		
+		});
+	});
+
+	$('.rzpBtn').click(function (e) {
+		e.preventDefault();
+
+
+		var first_name = $("[name = 'first_name']").val();
+		var email = $("[name = 'email']").val();
+		var mobile = $("[name = 'mobile']").val();
+		var address = $("[name = 'address']").val();
+		var city = $("[name = 'city']").val();
+		var state = $("[name = 'state']").val();
+		var country = $("[name = 'country']").val();
+		var pincode = $("[name = 'pincode']").val();
+		var token = $("[name = 'csrfmiddlewaretoken']").val();
+
+		if(first_name == ""|| email == ""|| mobile == ""|| address == ""|| city == ""|| state == ""|| country == ""|| pincode == "")
+		{
+			swal("Alert!", "All fields are required!!!!", "error");
+			return false;
+		} else {
+       				
+		};
+	});
+
 });

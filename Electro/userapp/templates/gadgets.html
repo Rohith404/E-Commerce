@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 
@@ -24,7 +25,7 @@
 											<div class="product-body">
 												<p class="product-category">{{ gad.category }}</p>
 												<h3 class="product-name"><a href="{% url 'productview' gad.category.category gad.id %}">{{ gad.product }}</a></h3>
-												<h4 class="product-price">$ {{ gad.offer_price }}  <del class="product-old-price"> $ {{ gad.original_price }}</del></h4>
+												<h4 class="product-price">Rs: {{ gad.offer_price|intcomma }}.00  <del class="product-old-price">Rs: {{ gad.original_price|intcomma }}.00</del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>

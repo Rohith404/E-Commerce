@@ -29,6 +29,12 @@ urlpatterns = [
     path("delete-wish-item", views.deletewishitem, name = "deletewishitem"),
 
     #checkout
-    path("checkout", views.checkout, name = "checkout"),
-    path("<str:prod_id>", views.buynow, name = "buynow"),
+    # path("checkout", views.checkout, name = "checkout"),
+    path("<str:cate_category>/<str:prod_id>/buynow", views.buynow, name = "buynow"),
+
+    #order
+    path("<str:cate_category>/<str:prod_id>/placeorder", views.placeorder, name = "placeorder"),
+    path("store-quantity", views.store_quantity, name = "store_quantity"),
+
+    path("<str:cate_category>/<str:prod_id>/orders", views.orders, name = "orders"),
 ]

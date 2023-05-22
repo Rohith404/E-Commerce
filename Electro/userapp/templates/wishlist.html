@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 
 {% block content %}
@@ -27,8 +28,8 @@
 										<h6> {{ prod.product.product }} </h6>
 									</div>
 
-									<div class="col-md-1 my-auto">
-										<h4>$ {{ prod.product.offer_price }} </h4>
+									<div class="col-md-2 my-auto">
+										<h4>Rs: {{ prod.product.offer_price|intcomma }}.00 </h4>
 									</div>
 									<div class="col-md-3 my-auto">
 										<a href="{% url 'productview' prod.product.category.category prod.product.id %}" class="btn btn-success wish"><i class="fa fa-eye"></i>  View Product</a>

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 
 {% block content %}
@@ -19,8 +20,7 @@
 
 										{% for prod in cart %}
 											<div class="row text-center product_data" id = "delete"><a href="{% url 'productview' prod.product.category.category prod.product.id %}">
-												<div class="col-md-1 my-auto">
-												</div>
+												
 												<div class="col-md-2 my-auto">
 													<img src="{{ prod.product.img.url }}" height="70px" width="100px" >
 												</div>
@@ -29,8 +29,8 @@
 													<h6> {{ prod.product.product }} </h6>
 												</div>
 
-												<div class="col-md-1 my-auto">
-													<h4>$ {{ prod.product.offer_price }} </h4>
+												<div class="col-md-2 my-auto">
+													<h4>Rs: {{ prod.product.offer_price|intcomma }}.00 </h4>
 												</div>
 												<div class="col-md-3 my-auto product_data quantity">
 													<input type="hidden" class="pros_id" value="{{ prod.product_id }}">
@@ -57,12 +57,10 @@
 											</a>
 											</div>
 										{% endfor %}
-										<br><br><br><br><br>
+										<br><br>
 										<div class="col-md-9"></div>
 										
-										<div class="col-md-3">
-											<a href="{% url 'checkout' %}" class="btn btn-danger check">Checkout <i class="fa fa-arrow-right"></i></a>
-										</div>
+										
 										
 
 								{% else %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 
 {% block content %}
@@ -17,14 +18,6 @@
 							</div>
 
 							<!-- <div class="product-preview">
-								<img src="{% static './img/product03.png' %}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="{% static './img/product06.png' %}" alt="">
-							</div>
-
-							<div class="product-preview">
 								<img src="{% static './img/product08.png' %}" alt="">
 							</div> -->
 						</div>
@@ -35,7 +28,7 @@
 					<div class="col-md-2  col-md-pull-5">
 						<!-- <div id="product-imgs">
 							<div class="product-preview">
-								<img src="{{ prod.img.url }}" alt="">
+								<img src="{% static './img/product08.png' %} alt="">
 							</div>
 						</div> -->
 					</div>
@@ -57,40 +50,48 @@
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
 							</div>
 							<div>
-								<h3 class="product-price">$ {{ prod.offer_price }} <del class="product-old-price">$ {{ prod.original_price }}</del></h3>
+								<h3 class="product-price">Rs: {{ prod.offer_price|intcomma }}.00 <del class="product-old-price">Rs: {{ prod.original_price|intcomma }}.00</del></h3>
 								{% if prod.quantity > 0 %}
 									<span class="badge alert-success">In Stock</span>
 								{% else %}
 									<span class="badge alert-danger">Out Of Stock</span>
 								{% endif %}
 							</div>
-							<p>{{ prod.description }}</p><br><br><br>
+							<p>{{ prod.description }}</p>
 
-							<div class="add-to-cart quantity">
-								{% csrf_token %}
-								<input type="hidden" value="{{ prod.id }}" class="pros_id">
-								<div class="qty-label quantity">
-									Qty
-									<div class="input-number quantity">
-										<span class="qty-up increment-btn">+</span>
-										<input type="number"  min="1" name = "quantity" id = "quantity" class="form-control qty-input text-center" value="1">
-										<span class="qty-down decrement-btn">-</span>
+							{% if prod.quantity > 0 %}
+							<br><br><br>
+								<div class="add-to-cart quantity">
+									{% csrf_token %}
+									<input type="hidden" value="{{ prod.id }}" class="pros_id">
+									<div class="qty-label quantity">
+										Qty
+										<div class="input-number quantity">
+											<span class="qty-up increment-btn">+</span>
+											<input type="number"  min="1" name = "quantity" class="form-control qty-input text-center" value="1">
+											<span class="qty-down decrement-btn">-</span>
+										</div>
 									</div>
+									<button class="add-to-cart-btn addToCartBtn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 								</div>
-								<button class="add-to-cart-btn addToCartBtn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
 
+									<br><br>
+									{% csrf_token %}
+									<input type="hidden" value="{{ prod.id }}" class="pros_id">
+									<button class="liked addToWishList"><i class="fa fa-heart"></i> Add To Wishlist</button>
 
-							{% csrf_token %}
-							<input type="hidden" value="{{ prod.id }}" class="pros_id">
-							<button class="liked addToWishList"><i class="fa fa-heart"></i> Add To Wishlist</button>
-
-							<br><br>
-							<form action="post" action="{% url 'buynow' prod.id %}">
-								{% csrf_token %}
-								<input type="hidden" value="{{ prod.id }}" class="pros_id">
-								<a href="{% url 'buynow' prod.id %}" class="btn btn-danger buy"> Buy Now </a>
-							</form>
+									<br><br>
+									<div class="quantity">
+										<form action="{% url 'buynow' prod.category.category prod.id %}?product_price={{prod.offer_price}}" method="post">
+			  								{% csrf_token %}
+			  								{{ form.as_p }}
+			  								<input type="hidden" value="{{ prod.id }}" class="pros_id">
+			  								<button type="submit" class="btn btn-danger buy">Buy Now</button>
+										</form>
+								</div>
+							{% else %}
+								<img src="{% static 'img/out.png' %}" width="40%">
+							{% endif %}
 							
 
 							<ul class="product-links">
@@ -371,7 +372,7 @@
 											<div class="product-body">
 												<p class="product-category">{{ pro.category }}</p>
 												<h3 class="product-name"><a href="{% url 'productview' pro.category.category pro.id %}">{{ pro.product }}</a></h3>
-												<h4 class="product-price">${{ pro.offer_price }}<del class="product-old-price"> ${{ pro.original_price }}</del></h4>
+												<h4 class="product-price">Rs: {{ pro.offer_price|intcomma }}.00<del class="product-old-price"> Rs: {{ pro.original_price|intcomma }}.00</del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>

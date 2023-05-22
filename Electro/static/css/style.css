@@ -90,7 +90,7 @@ ul, ol {
 	Buttons
 \*----------------------------*/
 
-.primary-btn {
+.hot {
   display: inline-block;
   padding: 12px 30px;
   background-color: #D10024;
@@ -104,10 +104,50 @@ ul, ol {
   transition: 0.2s all;
 }
 
-.primary-btn:hover, .primary-btn:focus {
+.hot:hover, .hot:focus {
   opacity: 0.9;
   color: #FFF;
 }
+
+.primary-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #ff0040;
+  border: none;
+  border-radius: 40px;
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+  width: 100%;
+}
+
+.primary-btn:hover, .primary-btn:focus {
+  color: #FFF;
+}
+
+.rzp-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #00bfff;
+  border: none;
+  border-radius: 40px;
+  color: #000000;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+  width: 100%;
+}
+
+.rzp-btn:hover, .rzp-btn:focus {
+  opacity: 0.9;
+  color: #000000;
+}
+
 
 /*----------------------------*\
 	Inputs
@@ -2848,7 +2888,7 @@ iframe {
     width: 62.5%;
     border-radius: 25px;
     color : #FFF;
-    border: 2px solid green;
+    border: 2px solid #c9302c;
     padding: 10px; 
     height: 1%;
     text-transform: uppercase;

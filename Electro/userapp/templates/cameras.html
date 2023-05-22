@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 		<!-- Products tab & slick -->
@@ -23,7 +24,7 @@
 											<div class="product-body">
 												<p class="product-category">{{ cam.category }}</p>
 												<h3 class="product-name"><a href="{% url 'productview' cam.category.category cam.id %}">{{ cam.product }}</a></h3>
-												<h4 class="product-price">$ {{ cam.offer_price }}  <del class="product-old-price"> $ {{ cam.original_price }}</del></h4>
+												<h4 class="product-price">Rs: {{ cam.offer_price|intcomma }}.00  <del class="product-old-price"> Rs: {{ cam.original_price|intcomma }}.00</del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>

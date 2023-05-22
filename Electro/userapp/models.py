@@ -4,7 +4,13 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User ,on_delete=models.CASCADE)
-    mobile = models.CharField(max_length=14)
+    mobile = models.CharField(max_length=14, default ='+91 ')
+    address = models.TextField(max_length = 100, null = False, default = '')
+    city = models.CharField(max_length = 100, null = False, default = '')
+    state = models.CharField(max_length = 100, null = False, default = '')
+    country = models.CharField(max_length = 100, null = False, default = '')
+    pincode = models.CharField(max_length = 100, null = False, default = '')
+    transaction = models.CharField(max_length = 100, null = False, default = '')
     forget_password_token = models.CharField(max_length=100)
 
     def __str__(self):
@@ -18,12 +24,12 @@ class Category(models.Model):
 
 class Product(models.Model):
 	category = models.ForeignKey(Category, on_delete = models.CASCADE)
-	img = models.ImageField(upload_to = 'pics')
+	img = models.ImageField(upload_to = 'pics')	
 	product = models.CharField(max_length = 150, default = '')
 	quantity = models.IntegerField(null = False, blank = False, default = '1')
 	description = models.CharField(max_length = 250, default = '')
-	original_price = models.IntegerField()
-	offer_price = models.IntegerField()
+	original_price = models.CharField(max_length = 10, default = '')
+	offer_price = models.CharField(max_length = 10, default = '')
 
 	def __str__(self):
 		return self.product
@@ -39,27 +45,30 @@ class Liked(models.Model):
 	product = models.ForeignKey(Product, on_delete = models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add = True)
 
+class Buy(models.Model):
+	user = models.ForeignKey(User, on_delete = models.CASCADE)
+	product = models.ForeignKey(Product, on_delete = models.CASCADE)
+	quantity = models.IntegerField(null = False, blank = False)
+	created_at = models.DateTimeField(auto_now_add = True)
+
 class Order(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	first_name = models.CharField(max_length = 100, null = False)
-	latst_name = models.CharField(max_length = 100, null = False)
 	email = models.CharField(max_length = 100, null = False)
 	address = models.TextField(null = False)
 	city = models.CharField(max_length = 100, null = False)
+	state = models.CharField(max_length = 100, null = False, default = '')
 	country = models.CharField(max_length = 100, null = False)
 	pincode = models.CharField(max_length = 100, null = False)
-	phone = models.CharField(max_length = 100, null = False)
+	mobile = models.CharField(max_length = 14, null = False)
 	total_price = models.FloatField(null = False)
-	payment_mode = models.CharField(max_length = 100, null = False)
-	payment_id = models.CharField(max_length = 250, null = True)
-	order_status = (
-		('Packed', 'Packed'),
-		('Shiped', 'Shiped'),
-		('Pending', 'Pending'),
-		('Delivered', 'Delivered'),
+	payment_mode = (
+		('COD', 'COD'),
+		('Razorpay', 'Razorpay'),
 	)
-	status = models.CharField(max_length = 150, choices = order_status, default = 'Pending')
-	message = models.TextField(null = True)
+	payments = models.CharField(max_length = 100, choices = payment_mode, default = '', null = True)
+	payment_id = models.CharField(max_length = 250, null = True)
+	
 	tracking_no = models.CharField(max_length = 250, null = True)
 	created_at = models.DateTimeField(auto_now_add = True)
 	updated_at = models.DateTimeField(auto_now = True)
@@ -67,6 +76,15 @@ class Order(models.Model):
 	def __str__(self):
 		return '{} - {}'.format(self.user, self.tracking_no)
 
+class OrderItem(models.Model):
+	user = models.ForeignKey(User, on_delete = models.CASCADE, default = '')
+	order = models.ForeignKey(Order, on_delete = models.CASCADE)
+	product = models.ForeignKey(Product, on_delete = models.CASCADE)
+	price = models.FloatField(null = False)
+	quantity = models.IntegerField(null = False)
+
+	def __str__(self):
+		return '{} {}'.format(self.order.id, self.order.tracking_no)
 
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 
 {% block content %}
-
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
@@ -25,205 +25,219 @@
 		<!-- /BREADCRUMB -->
 
 		<!-- SECTION -->
-		<div class="section">
+		<div class="section product_data">
 			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-
-					<div class="col-md-7">
-						<!-- Billing Details -->
-						<div class="billing-details">
-							<div class="section-title">
-								<h3 class="title">Billing address</h3>
-							</div>
-							<div class="form-group">
-								<label for ='first_name'><b>First Name</b></label><br>
-								<input class="input" type="text" name="first_name" placeholder="First Name" required>
-							</div>
-							<div class="form-group">
-								<label for ='last_name'><b>Last Name</b></label><br>
-								<input class="input" type="text" name="last_name" placeholder="Last Name" required>
-							</div>
-							<div class="form-group">
-								<label for ='email'><b>Email</b></label><br>
-								<input class="input" type="email" name="email" placeholder="Email" required>
-							</div>
-							<div class="form-group">
-								<label for ='address'><b>Address</label><br>
-								<input class="input" type="text" name="address" placeholder="Address" required>
-							</div>
-							<div class="form-group">
-								<label for ='city'><b>City</b></label><br>
-								<input class="input" type="text" name="city" placeholder="City" required>
-							</div>
-							<div class="form-group">
-								<label for ='country'><b>Country</b></label><br>
-								<input class="input" type="text" name="country" placeholder="Country" required>
-							</div>
-							<div class="form-group">
-								<label for ='pincode'><b>Pincode</b></label><br>
-								<input class="input" type="text" name="pincode" placeholder="Pin Code" required>
-							</div>
-							<div class="form-group">
-								<label for ='telephone'><b>Telephone</b></label><br>
-								<input class="input" type="number" name="phone" placeholder="Telephone" required>
-							</div>
-							<div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="create-account">
-									<label for="create-account">
-										<span></span>
-										Create Account?
-									</label>
-									<div class="caption">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-										<input class="input" type="password" name="password" placeholder="Enter Your Password">
-									</div>
+			<div class="container product_data">
+				<form action="{% url 'placeorder' prod.category.category prod.id %}" method="POST">
+					{% csrf_token %}
+					<!-- row -->
+					<div class="row product_data">
+						<div class="col-md-7">
+							<!-- Billing Details -->
+							<div class="billing-details">
+								<div class="section-title">
+									<h3 class="title">Billing address</h3>
+								</div>
+								<div class="form-group">
+									<label for ='first_name'><b>Name</b></label><br>
+									<input class="input" type="text" value="{{ request.user.first_name }}" name="first_name" placeholder="Name" required>
+								</div>
+								<div class="form-group">
+									<label for ='email'><b>Email</b></label><br>
+									<input class="input" type="email" value="{{ request.user.email }}" name="email" placeholder="Email" required>
+								</div>
+								<div class="form-group">
+									<label for ='telephone'><b>Telephone</b></label><br>
+									<input class="input" type="number" value="{{ userprofile.mobile }}" name="mobile" placeholder="Telephone" required>
+								</div>
+								<div class="form-group">
+									<label for ='address'><b>Address</b></label><br>
+									<input class="input" type="text" value="{{ userprofile.address }}" name="address" placeholder="Address" required>
+								</div>
+								<div class="form-group">
+									<label for ='city'><b>City</b></label><br>
+									<input class="input" type="text" value="{{ userprofile.city }}" name="city" placeholder="City" required>
+								</div>
+								<div class="form-group">
+									<label for ='state'><b>State</b></label><br>
+									<input class="input" type="text" value="{{ userprofile.state }}" name="state" placeholder="State" required>
+								</div>
+								<div class="form-group">
+									<label for ='country'><b>Country</b></label><br>
+									<input class="input" type="text" value="{{ userprofile.country }}" name="country" placeholder="Country" required>
+								</div>
+								<div class="form-group">
+									<label for ='pincode'><b>Pincode</b></label><br>
+									<input class="input" type="text" value="{{ userprofile.pincode }}" name="pincode" placeholder="Pin Code" required>
 								</div>
 							</div>
-						</div>
-						<!-- /Billing Details -->
+							<!-- /Billing Details -->
 
-						<!-- Shiping Details -->
-						<div class="shiping-details">
-							<div class="section-title">
-								<h3 class="title">Shiping address</h3>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="shiping-address">
-								<label for="shiping-address">
-									<span></span>
-									Ship to a diffrent address?
-								</label>
-								<div class="caption">
-									<div class="form-group">
-								<label for ='first_name'><b>First Name</b></label><br>
-								<input class="input" type="text" name="first_name" placeholder="First Name" required>
-							</div>
-							<div class="form-group">
-								<label for ='last_name'><b>Last Name</b></label><br>
-								<input class="input" type="text" name="last_name" placeholder="Last Name" required>
-							</div>
-							<div class="form-group">
-								<label for ='email'><b>Email</b></label><br>
-								<input class="input" type="email" name="email" placeholder="Email" required>
-							</div>
-							<div class="form-group">
-								<label for ='address'><b>Address</label><br>
-								<input class="input" type="text" name="address" placeholder="Address" required>
-							</div>
-							<div class="form-group">
-								<label for ='city'><b>City</b></label><br>
-								<input class="input" type="text" name="city" placeholder="City" required>
-							</div>
-							<div class="form-group">
-								<label for ='country'><b>Country</b></label><br>
-								<input class="input" type="text" name="country" placeholder="Country" required>
-							</div>
-							<div class="form-group">
-								<label for ='pincode'><b>Pincode</b></label><br>
-								<input class="input" type="text" name="pincode" placeholder="Pin Code" required>
-							</div>
-							<div class="form-group">
-								<label for ='telephone'><b>Telephone</b></label><br>
-								<input class="input" type="number" name="phone" placeholder="Telephone" required>
-							</div>
-								</div>
-							</div>
+							
 						</div>
-						<!-- /Shiping Details -->
 
-						<!-- Order notes -->
-						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
-						</div>
-						<!-- /Order notes -->
-					</div>
-
-					<!-- Order Details -->
-					<div class="col-md-5 order-details">
-						<div class="section-title text-center">
-							<h3 class="title">Your Order</h3>
-						</div>
-							<div class="order-summary">
-								<div class="order-col">
-									<div><strong>PRODUCT</strong></div>
-									<div><strong>AMOUNT</strong></div>
-								</div>
-								<div class="order-products">
+						<!-- Order Details -->
+						<div class="col-md-5 order-details product_data">
+							<div class="section-title text-center">
+								<h3 class="title">Your Order</h3>
+							</div>
+								<div class="order-summary product_data">
 									<div class="order-col">
-										<div>
-											<img src="{{ prod.img.url }}" class="me-2" height="50px" width="50px">
-											{{ prod.product }} ( {{ quantity }} )
-										</div>
-										<div> $ {{ prod.offer_price }}.00 </div>
+										<div><strong>PRODUCT</strong></div>
+										<div><strong>AMOUNT</strong></div>
 									</div>
-								<div class="order-col">
-									<div>Shiping Cost</div>
-									{% if prod.offer_price > 10 %}
-										<div><strong>FREE</strong></div>
-									{% else %}
-										<div><strong>+ $ 2.00</strong></div>
-									{% endif %}
+									<div class="order-products quantity">
+										<div class="order-col quantity">
+											<div>
+												<img src="{{ prod.img.url }}" class="me-2" height="50px" width="50px">
+												{{ prod.product }} ( {{ quantity }} )
+
+											</div>
+											<div> Rs: {{ prod.offer_price|intcomma }}.00 </div>
+										</div>
+										<div class="order-col">
+											<div>Shiping Cost</div>
+											{% if prod.offer_price > 500 %}
+												<div><strong>FREE</strong></div>
+											{% else %}
+												<div><strong>+ Rs: 40.00</strong></div>
+											{% endif %}
+										</div>
+										<div class="order-col">
+											<div><strong>TOTAL</strong></div>
+											{% if prod.offer_price > 500 %}
+												<div><strong class="order-total">Rs: {{ prod.offer_price|intcomma }}.00</strong></div>
+											{% else %}
+												<div><strong class="order-total">Rs: {{ total }}.00</strong></div>
+											{% endif %}
+										</div>
+									</div>
 								</div>
-								<div class="order-col">
-									<div><strong>TOTAL</strong></div>
-									{% if prod.offer_price > 10 %}
-										<div><strong class="order-total">$ {{ prod.offer_price }}.00</strong></div>
-									{% else %}
-										<div><strong class="order-total">$ {{ total }}.00</strong></div>
-									{% endif %}
-								</div>
-							</div>
+							<button type="submit" class="primary-btn order-submit">Cash On Delivery</button><br>
+							
+							{% csrf_token %}
+							<input type="hidden" name="product_price" value="{{ prod.offer_price }}">
+							<button type="submit" id="rzp-button1" class="rzpBtn rzp-btn">Pay with Razorpay</button>
+							
+								
 						</div>
-						<div class="payment-method">
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-1">
-								<label for="payment-1">
-									<span></span>
-									Direct Bank Transfer
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-2">
-								<label for="payment-2">
-									<span></span>
-									Cheque Payment
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-3">
-								<label for="payment-3">
-									<span></span>
-									Paypal System
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-						</div>
-						<div class="input-checkbox">
-							<input type="checkbox" id="terms">
-							<label for="terms">
-								<span></span>
-								I've read and accept the <a href="#">terms & conditions</a>
-							</label>
-						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
+						<!-- /Order Details -->
 					</div>
-					<!-- /Order Details -->
-				</div>
-				<!-- /row -->
+					<!-- /row -->
+				</form>
+
+				<!-- Razorpay -->
+				
+        		<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+			    <script>
+			        var options = {
+			            "key": "rzp_test_vl3K2w18t3KZTJ",
+			            "amount": "{{ total_price }}",
+			            "currency": "INR",
+			            "name": "Electro",
+			            "description": "Thank you for purchasing from us.",
+			            "image": "http://127.0.0.1:8000/static/img/logo(1).png",
+			            // "order_id": "{{ order.id }}",
+			            "handler": function (response) {
+			                // alert(response.razorpay_payment_id);
+
+			                var first_name = response.first_name;
+			                var email = response.email;
+			                var address = response.address;
+			                var mobile = response.mobile;
+			                var country = response.country;
+			                var city = response.city;
+			                var state = response.state;
+			                var pincode = response.pincode;
+			                var payment_id = response.razorpay_payment_id;
+			                var payments = "Razorpay";
+			                var total_price = response.total_price;
+			                var token = $("[name = 'csrfmiddlewaretoken']").val();
+			                
+							
+			                $.ajax({
+			                	headers:  {
+			                		"X-CSRFToken": getCookie("csrftoken"),
+			                	},
+			                	method: "POST",
+			                	url: "placeorder",
+			                	data: {
+				                	"first_name": "{{ request.user.first_name }}",
+				                	"email": "{{ request.user.email }}",
+				                	"address": "{{ request.user.profile.address }}",
+				                	"mobile": "{{ request.user.profile.mobile }}",
+				                	"country": "{{ request.user.profile.country }}",
+				                	"city": "{{ request.user.profile.city }}",
+							        "state": "{{ request.user.profile.state }}",
+							        "pincode": "{{ request.user.profile.pincode }}",
+							        "payments": payments,
+							        "payment_id": payment_id,
+							        "total_price": total_price,
+							        csrfmiddlewaretoken: token,
+								},
+								success: function (response) {
+							    	swal("Congratulations","Your order has been successfully placed", "success").then((value) =>{
+										window.location.href = 'orders'
+									});
+							    },
+			                });
+			            },
+			            "prefill": {
+			                "name": "{{ request.user.first_name }}",
+			                "email": "{{ request.user.email }}",
+			                "contact": "{{ request.user.profile.mobile }}",
+			            },
+			            "notes": {
+			                "address": "Razorpay Corporate Office"
+			            },
+			            "theme": {
+			                "color": "#3399cc"
+			            }
+			        };
+
+			        var rzp1 = new Razorpay(options);
+			        document.getElementById('rzp-button1').onclick = function(e){
+			            rzp1.open();
+			            e.preventDefault();
+			        }
+			        function getCookie(name) {
+						let cookieValue = null;
+						if (document.cookie && document.cookie !== "") {
+						    const cookies = document.cookie.split(";");
+						    for (let i = 0; i < cookies.length; i++) {
+						      	const cookie = cookies[i].trim();
+						      	// Check if the cookie name matches the provided name
+						      	if (cookie.substring(0, name.length + 1) === name + "=") {
+						        	cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						       		break;
+						      	}
+						    }
+						}
+						return cookieValue;
+					}
+			    </script>
+
+
+       			<!-- SweatAlert -->
+        		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 			</div>
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
 
 {% endblock content %}
+
+<!-- data = {
+			                	// "first_name": "{{ request.user.first_name }}",
+			                	// "email": "{{ request.user.email }}",
+			                	// "address": "{{ request.user.profile.address }}",
+			                	// "mobile": "{{ request.user.profile.mobile }}",
+			                	// "country": "{{ request.user.profile.country }}",
+			                	// "city": "{{ request.user.profile.city }}",
+						        // "state": "{{ request.user.profile.state }}",
+						        // "pincode": "{{ request.user.profile.pincode }}",
+						        // "payments": "Razorpay",
+						        // "payment_id": response.razorpay_payment_id,
+						        // csrfmiddlewaretoken: token, -->
