@@ -158,11 +158,14 @@
                                 <!-- /Cart -->
 
                                 <!-- Menu Toogle -->
-                                <div class="menu-toggle">
-                                    <a href="#">
-                                        <i class="fa fa-bars"></i>
-                                        <span>Menu</span>
-                                    </a>
+                                <div class="menu-toggle dropdown">
+                                    <a href="/" class="dropmenu"><i class="fa fa-bars"></i><span>Menu</span></a>
+                                    <div class="dropdown-content">
+                                    <a href="/">Home</a>
+                                    <a href="{% url 'mobile' %}">Mobile</a>
+                                    <a href="{% url 'laptop' %}">Laptop</a>
+                                    <a href="{% url 'cameras' %}">Cameras</a>
+                                    <a href="{% url 'gadgets' %}">Gadgets</a>
                                 </div>
                                 <!-- /Menu Toogle -->
                             </div>

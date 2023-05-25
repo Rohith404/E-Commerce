@@ -1,9 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content%}
-<div class="container">
-	<br>
-	<h1>This is your orders page</h1>
-</div>
+{% block content %}
+<br>
+		<!-- SECTION -->
+		<div class = "product_data">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row product_data"><br>
+					<div class="col-md-12">
+						<div class="card shadow">
+							<div class="card-body">
+								<u><h2 class="text-center">Your Orders</h2></u>
+								<br>
+								<table class="table table-bordered" style="width: 100%;">
+									<thead>
+					    				<tr>
+					    					<th>Order Date</th>
+					    					<th>Tracking Number</th>
+					    					<th>Username</th>
+					    					<th>Total</th>
+					    					<th>Action</th>
+					    				</tr>
+					    			</thead>
+					    			<tbody>
+					    				{% for item in orders %}
+						    				<tr>
+						    					<td> {{ item.created_at }} </td>
+						    					<td> {{ item.tracking_no }} </td>
+						    					<td> {{ item.first_name }} </td>
+						    					<td> {{ item.total_price }} </td>
+						    					<td>
+						    						<a href="{% url 'orderview' prod.category.category prod.id item.tracking_no %}" class="btn btn-primary">View</a>
+						    					</td>
+						    				</tr>
+						    			{% endfor %} 
+					    			</tbody>
+					    		</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+
 {% endblock content %}

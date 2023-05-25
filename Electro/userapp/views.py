@@ -333,7 +333,6 @@ def placeorder(request, cate_category, prod_id):
         neworder.country = request.POST.get('country')
         neworder.pincode = request.POST.get('pincode')
         neworder.payment_mode = request.POST.get('payment_mode')
-        neworder.payments = request.POST.get('payments')
         neworder.payment_id = request.POST.get('payment_id')
 
         total_amt = 0
@@ -380,8 +379,23 @@ def placeorder(request, cate_category, prod_id):
             orderproduct.quantity = orderproduct.quantity - quantity
             orderproduct.save()
 
+       
+        messages.success(request, "Your order has been placed successfully.")
+
+
     return redirect('/')
 
 @login_required(login_url = 'login')
 def orders(request, cate_category, prod_id):
-    return render(request, 'orders.html')
+    orders = Order.objects.filter(user = request.user)
+    prod = Product.objects.filter(id = prod_id).first()
+    context = {'orders':orders, 'prod' : prod}
+    return render(request, 'orders.html', context)
+
+@login_required(login_url = 'login')
+def orderview(request,cate_category, prod_id, t_no):
+    order = Order.objects.filter(tracking_no = t_no).filter(user = request.user).first()
+    orderitems = OrderItem.objects.filter(order = order)
+    userprofile = Profile.objects.filter(user = request.user).first()
+    context = {'order' : order, 'orderitems' : orderitems, 'userprofile' : userprofile}
+    return render(request, 'orderview.html', context)

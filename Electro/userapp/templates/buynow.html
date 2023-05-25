@@ -113,6 +113,7 @@
 										</div>
 									</div>
 								</div>
+							<input type="hidden" value="COD" name="payment_mode">
 							<button type="submit" class="primary-btn order-submit">Cash On Delivery</button><br>
 							
 							{% csrf_token %}
@@ -151,7 +152,7 @@
 			                var state = response.state;
 			                var pincode = response.pincode;
 			                var payment_id = response.razorpay_payment_id;
-			                var payments = "Razorpay";
+			                var payment_mode = "Razorpay";
 			                var total_price = response.total_price;
 			                var token = $("[name = 'csrfmiddlewaretoken']").val();
 			                
@@ -171,7 +172,7 @@
 				                	"city": "{{ request.user.profile.city }}",
 							        "state": "{{ request.user.profile.state }}",
 							        "pincode": "{{ request.user.profile.pincode }}",
-							        "payments": payments,
+							        "payment_mode": payment_mode,
 							        "payment_id": payment_id,
 							        "total_price": total_price,
 							        csrfmiddlewaretoken: token,
@@ -228,16 +229,3 @@
 		<!-- /SECTION -->
 
 {% endblock content %}
-
-<!-- data = {
-			                	// "first_name": "{{ request.user.first_name }}",
-			                	// "email": "{{ request.user.email }}",
-			                	// "address": "{{ request.user.profile.address }}",
-			                	// "mobile": "{{ request.user.profile.mobile }}",
-			                	// "country": "{{ request.user.profile.country }}",
-			                	// "city": "{{ request.user.profile.city }}",
-						        // "state": "{{ request.user.profile.state }}",
-						        // "pincode": "{{ request.user.profile.pincode }}",
-						        // "payments": "Razorpay",
-						        // "payment_id": response.razorpay_payment_id,
-						        // csrfmiddlewaretoken: token, -->

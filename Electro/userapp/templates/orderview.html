@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">OrderView</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="/">Home</a></li>
+							<li class="active">OrderView</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section product_data">
+			<!-- container -->
+			<div class="container product_data">
+				<form action="" method="POST">
+					{% csrf_token %}
+					<!-- row -->
+					<div class="row product_data">
+						<div class="col-md-7">
+							<!-- Billing Details -->
+							<div class="billing-details">
+								<div class="section-title">
+									<h3 class="title">Billing address</h3>
+								</div>
+								<div class="form-group">
+									<label for ='first_name'><b>Name</b></label><br>
+									<input class="input" type="text" value="{{ order.first_name }}" name="first_name" placeholder="Name" required>
+								</div>
+								<div class="form-group">
+									<label for ='email'><b>Email</b></label><br>
+									<input class="input" type="email" value="{{ order.email }}" name="email" placeholder="Email" required>
+								</div>
+								<div class="form-group">
+									<label for ='telephone'><b>Telephone</b></label><br>
+									<input class="input" type="number" value="{{ order.mobile }}" name="mobile" placeholder="Telephone" required>
+								</div>
+								<div class="form-group">
+									<label for ='address'><b>Address</b></label><br>
+									<input class="input" type="text" value="{{ order.address }}" name="address" placeholder="Address" required>
+								</div>
+								<div class="form-group">
+									<label for ='city'><b>City</b></label><br>
+									<input class="input" type="text" value="{{ order.city }}" name="city" placeholder="City" required>
+								</div>
+								<div class="form-group">
+									<label for ='state'><b>State</b></label><br>
+									<input class="input" type="text" value="{{ order.state }}" name="state" placeholder="State" required>
+								</div>
+								<div class="form-group">
+									<label for ='country'><b>Country</b></label><br>
+									<input class="input" type="text" value="{{ order.country }}" name="country" placeholder="Country" required>
+								</div>
+								<div class="form-group">
+									<label for ='pincode'><b>Pincode</b></label><br>
+									<input class="input" type="text" value="{{ order.pincode }}" name="pincode" placeholder="Pin Code" required>
+								</div>
+							</div>
+							<!-- /Billing Details -->
+
+							
+						</div>
+						<br>
+
+						<div class="col-md-5 order-details product_data">
+							<div class="section-title text-center">
+								<h3 class="title">Your Order</h3>
+							</div>
+								<table class="table table-bordered" style="width: 100%;">
+									<thead>
+								    	<tr>
+								    		<th>Name</th>
+								    		<th>Quantity</th>
+								    		<th>Price</th>
+								    		<th>Image</th>
+								    	</tr>
+								    </thead>
+								    <tbody>
+								    	{% for item in orderitems %}
+									    	<tr>
+									    		<td> {{ item.product.product }} </td>
+									    		<td> {{ item.quantity }} </td>
+									    		<td> {{ item.price }} </td>
+									    		<td>
+									    			<img src="{{ item.product.img.url }}" height="75px" width="75px">
+									    		</td>
+									    	</tr>
+									    {% endfor %} 
+								    </tbody>
+								</table>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+{% endblock content %}

@@ -37,4 +37,5 @@ urlpatterns = [
     path("store-quantity", views.store_quantity, name = "store_quantity"),
 
     path("<str:cate_category>/<str:prod_id>/orders", views.orders, name = "orders"),
+    path("<str:cate_category>/<str:prod_id>/<str:t_no>/orderview", views.orderview, name = "orderview"),
 ]

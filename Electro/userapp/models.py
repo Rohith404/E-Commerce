@@ -62,13 +62,8 @@ class Order(models.Model):
 	pincode = models.CharField(max_length = 100, null = False)
 	mobile = models.CharField(max_length = 14, null = False)
 	total_price = models.FloatField(null = False)
-	payment_mode = (
-		('COD', 'COD'),
-		('Razorpay', 'Razorpay'),
-	)
-	payments = models.CharField(max_length = 100, choices = payment_mode, default = '', null = True)
+	payment_mode = models.CharField(max_length = 150, null = False, default = '')
 	payment_id = models.CharField(max_length = 250, null = True)
-	
 	tracking_no = models.CharField(max_length = 250, null = True)
 	created_at = models.DateTimeField(auto_now_add = True)
 	updated_at = models.DateTimeField(auto_now = True)

@@ -135,6 +135,7 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
+
 								<!-- Wishlist -->
 								<div>
 									<a href="{% url 'wishlist' %}">
@@ -155,12 +156,16 @@
 								<!-- /Cart -->
 
 								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
+								<div class="menu-toggle dropdown">
+                                    <a href="/" class="dropmenu"><i class="fa fa-bars"></i><span>Menu</span></a>
+                                    <div class="dropdown-content">
+	                                    <a href="/">Home</a>
+	                                    <a href="{% url 'mobile' %}">Mobile</a>
+	                                    <a href="{% url 'laptop' %}">Laptop</a>
+	                                    <a href="{% url 'cameras' %}">Cameras</a>
+	                                    <a href="{% url 'gadgets' %}">Gadgets</a>
+                                   	</div>
+                                </div>
 								<!-- /Menu Toogle -->
 							</div>
 						</div>
