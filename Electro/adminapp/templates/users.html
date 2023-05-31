@@ -30,12 +30,14 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-            <h2>Manage <b>Users</b></h2>
-          </div>
-          <div class="col-sm-6">
-            <a href="#AddUsers" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
-                      
-          </div>
+                      <h2 style="color: #fff ;">Manage <b>Users</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                      <a href="#AddProducts" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a> 
+                      <a href="{% url 'home' %}" class="btn btn-danger" data-toggle="modal">
+                        <span>Home</span>
+                      </a>     
+                    </div>
                 </div>
             </div>
             <table class="table table-striped table-hover">
@@ -68,10 +70,15 @@
             </table>
         </div>
       
+
+      <!-- Alertify js -->
+      <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
       <script>
           alertify.set('notifier','position', 'top-right');
           {% for msg in messages %}
-              alertify.error('{{ msg }}');
+              alertify.success('{{ msg }}');
           {% endfor %}
       </script>
     

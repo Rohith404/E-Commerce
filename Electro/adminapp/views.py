@@ -30,7 +30,6 @@ def home(request):
 	cate = Category.objects.count()
 	prod = Product.objects.count()
 	context = {'total_count' : total_count, 'users' : users, 'cate' : cate, 'prod' : prod}
-	messages.success(request, "Welcome Admin")
 	return render(request, "home.html", context)
 
 @login_required(login_url = 'admin_login')
@@ -45,13 +44,14 @@ def add_products(request):
 		category_name = request.POST.get('category')
 		category = Category.objects.get(category = category_name)
 		product = request.POST.get('product')
-		img = request.POST.get('img')
+		if len(request.FILES) != 0:	
+			img = request.FILES['img']
 		quantity = request.POST.get('quantity')
 		description = request.POST.get('description')
 		offer_price = request.POST.get('offer_price')
 		original_price = request.POST.get('original_price')
 
-		pro = Product.objects.create(
+		pro = Product(
 			category = category,
 			product = product,
 			img = img,
@@ -73,7 +73,8 @@ def product_update(request, category, id):
 		category_name = request.POST.get('category')
 		category = Category.objects.get(category = category_name)
 		product = request.POST.get('product')
-		img = request.POST.get('img')
+		if len(request.FILES) != 0:	
+			img = request.FILES['img']
 		quantity = request.POST.get('quantity')
 		description = request.POST.get('description')
 		offer_price = request.POST.get('offer_price')
