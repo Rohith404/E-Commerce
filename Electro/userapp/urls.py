@@ -29,13 +29,15 @@ urlpatterns = [
     path("delete-wish-item", views.deletewishitem, name = "deletewishitem"),
 
     #checkout
-    # path("checkout", views.checkout, name = "checkout"),
     path("<str:cate_category>/<str:prod_id>/buynow", views.buynow, name = "buynow"),
 
     #order
     path("<str:cate_category>/<str:prod_id>/placeorder", views.placeorder, name = "placeorder"),
-    path("store-quantity", views.store_quantity, name = "store_quantity"),
 
+    #orderView
     path("<str:cate_category>/<str:prod_id>/orders", views.orders, name = "orders"),
     path("<str:cate_category>/<str:prod_id>/<str:t_no>/orderview", views.orderview, name = "orderview"),
+
+    #searchbar
+    path("product-list", views.productlist, name = "productlist"),
 ]

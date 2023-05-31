@@ -1,0 +1,81 @@
+{% load static %}
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<title>Admin Login</title>
+
+	<!-- Meta tags -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Style -->
+	<link rel="stylesheet" href="{% static 'css/adminstyle.css' %}" type="text/css" media="all" />
+
+	<!-- Alertify css -->
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        
+    <!-- Alertify css -->
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+</head>
+
+<body>
+	<!-- login form -->
+	<section class="w3l-login">
+		<div class="overlay">
+			<div class="wrapper">
+				<div class="logo">
+					<a class="brand-logo" href="index.html">Admin Login</a>
+				</div>
+				<div class="form-section">
+					<h3>Login</h3>
+					<h6>To continue with Us</h6>
+					<form action="{% url 'admin_login' %}" method="POST" class="signin-form">
+						{% csrf_token %}
+						<div class="form-input">
+							<input type="text" name="username" placeholder="Username" required="" autofocus>
+						</div>
+						<div class="form-input">
+							<input type="password" name="password" placeholder="Password" required="">
+						</div>
+						<button type="submit" class="btn btn-primary theme-button mt-4">Log in</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id='stars'></div>
+		<div id='stars2'></div>
+		<div id='stars3'></div>
+
+		<!-- copyright -->
+		<div class="copy-right">
+			<p>&copy; 2020 Snow Login Form. All rights reserved | Design by <a href="https://rohith404.github.io/Personal-Website/" target="_blank">Rohith</a></p>
+		</div>
+		<!-- //copyright -->
+
+		<!-- Alertify js -->
+	    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	    <script>
+		        alertify.set('notifier','position', 'top-right');
+		        {% for msg in messages %}
+					alertify.error('{{ msg }}');
+		        {% endfor %}
+	    </script>
+
+	</section>
+
+	<!-- /login form -->
+</body>
+
+</html>

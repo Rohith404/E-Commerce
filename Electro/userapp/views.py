@@ -245,28 +245,6 @@ def deletewishitem(request):
             return JsonResponse({'status': "Item Deleted"})
     return redirect('/')
 
-# @login_required(login_url = 'login')
-# def checkout(request):
-#     rawcart = Cart.objects.filter(user = request.user)
-#     for prod in rawcart:
-#         if prod.quantity > prod.product.quantity:
-#             Cart.objects.delete(id = prod.id)
-#     cart = Cart.objects.filter(user = request.user)
-#     total_price = 0
-#     for prod in cart:
-#         total_price = total_price + prod.product.offer_price * prod.quantity
-#     context = {'cart' : cart, 'total_price' : total_price}
-#     return render(request, 'checkout.html', context)
-
-@login_required(login_url = 'login')
-def store_quantity(request):
-    if request.method == 'POST':
-        quantity = request.POST.get('quantity')
-        request.session['quantity'] = int(quantity)
-        return redirect('buynow')
-    else:
-        return render(request, 'productview.html')
-
 @login_required(login_url = 'login')
 def buynow(request, cate_category, prod_id):
     if(Category.objects.filter(category = cate_category)):
@@ -399,3 +377,9 @@ def orderview(request,cate_category, prod_id, t_no):
     userprofile = Profile.objects.filter(user = request.user).first()
     context = {'order' : order, 'orderitems' : orderitems, 'userprofile' : userprofile}
     return render(request, 'orderview.html', context)
+
+def productlist(request):
+    products = Product.objects.filter(product = 10).values_list('product', flat = True)
+    productsList = list(products)
+
+    return JsonResponse(productsList, safe = False)

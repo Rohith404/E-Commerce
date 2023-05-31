@@ -38,6 +38,9 @@
 
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 
+        <!-- Autocomplete jquery css -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -125,7 +128,7 @@
 						<div class="col-md-6">
 							<div class="header-search">
 								<form>
-									<input class="input" placeholder="Search here">
+									<input id="search" class="input" placeholder="Search here">
 									<button class="search-btn">Search</button>
 								</form>
 							</div>
@@ -585,6 +588,27 @@
 		<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
 		<script src="{% static 'js/script.js' %}"></script>
+
+		<!-- Jquery Autocomplete -->
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  		<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  		<script>
+  			var availableTags = [
+			    "Sandisk 64Gb Pendrive",
+			    "AppleAirpod",
+			    "IPad",
+			    "BoatHeadset",
+			    "Sony Camera",
+			    "Lenovo ThinkPad",
+			    "Hp Laptop",
+			    "Samsung Mobile",
+			];
+			$( "#search" ).autocomplete({
+				source: availableTags
+			});
+  		</script>
+
+		
 		<!-- Alertify js -->
 		<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
