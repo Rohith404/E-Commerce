@@ -1,12 +1,15 @@
 from userapp.models import Product, Order, OrderItem, User, Category, Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from django.db.models.functions import ExtractMonth
 from django.contrib.auth.models import User, auth
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.contrib import messages
+from django.db.models import Count
+import calendar
 
 def admin_login(request):
 	if request.method == 'POST':
@@ -29,7 +32,14 @@ def home(request):
 	users = User.objects.count()
 	cate = Category.objects.count()
 	prod = Product.objects.count()
-	context = {'total_count' : total_count, 'users' : users, 'cate' : cate, 'prod' : prod}
+	orders = Order.objects.annotate(month = ExtractMonth('created_at')).values('month').annotate(count = Count('id')).values('month', 'count')
+	monthNumber = []
+	totalOrders = []
+	for i in orders:
+		monthNumber.append(calendar.month_name[i['month']])
+		totalOrders.append(i['count'])
+
+	context = {'total_count' : total_count, 'users' : users, 'cate' : cate, 'prod' : prod, 'orders' : orders, 'monthNumber' : monthNumber, 'totalOrders' : totalOrders}
 	return render(request, "home.html", context)
 
 @login_required(login_url = 'admin_login')

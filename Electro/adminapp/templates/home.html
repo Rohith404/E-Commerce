@@ -128,7 +128,7 @@ Author URL: http://w3layouts.com
             </div>
             <div class="col-sm-6 pl-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
-                <i class="lnr lnr-eye"> </i>
+                <i class="lnr lnr-store"> </i>
                 <h3 class="text-secondary number">{{ prod }} K</h3>
                 <p class="stat-text">Total Products</p>
               </div>
@@ -139,7 +139,7 @@ Author URL: http://w3layouts.com
           <div class="row">
             <div class="col-sm-6 pr-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
-                <i class="lnr lnr-cloud-download"> </i>
+                <i class="lnr lnr-list"> </i>
                 <h3 class="text-success number">{{ cate }} K</h3>
                 <p class="stat-text">Total Category</p>
               </div>
@@ -160,27 +160,59 @@ Author URL: http://w3layouts.com
     <!-- charts -->
     <div class="chart">
       <div class="row">
-        <div class="col-lg-6 pr-lg-2 chart-grid">
+        <!-- <div class="col-lg-6 pr-lg-2 chart-grid">
           <div class="card text-center card_border">
             <div class="card-header chart-grid__header">
               Bar Chart
             </div>
-            <div class="card-body">
+            <div class="card-body"> -->
               <!-- bar chart -->
-              <div id="container">
+              <!-- <div id="container">
                 <canvas id="barchart"></canvas>
-              </div>
+              </div> -->
               <!-- //bar chart -->
-            </div>
+           <!--  </div>
             <div class="card-footer text-muted chart-grid__footer">
               Updated just now
             </div>
           </div>
+        </div> -->
+        <div class="col-lg-5 pr-lg-2 chart-grid">
+          <div class="card-header chart-grid__header text-center">
+              Orders
+          </div>
+          <div>   
+            <canvas id="myChart"></canvas>
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+          <script>
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+              type: 'pie',
+              data: {
+                labels: {{monthNumber|safe}},
+                datasets: [{
+                  label: 'Orders',
+                  data: {{totalOrders}},
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          </script>
         </div>
-        <div class="col-lg-6 pl-lg-2 chart-grid">
+        <div class="col-lg-7 pl-lg-2 chart-grid">
           <div class="card text-center card_border">
             <div class="card-header chart-grid__header">
-              Line Chart
+              Orders Chart
             </div>
             <div class="card-body">
               <!-- line chart -->
