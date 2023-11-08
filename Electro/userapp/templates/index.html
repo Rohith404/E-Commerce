@@ -41,48 +41,6 @@
         <!-- Autocomplete jquery css -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
-		<script type="text/javascript">
-
-	        function getCookie(name) {
-	            var cookieValue = null;
-	            if (document.cookie && document.cookie !== '') {
-	                var cookies = document.cookie.split(';');
-	                for (var i = 0; i < cookies.length; i++) {
-	                    var cookie = cookies[i].trim();
-	                    // Does this cookie string begin with the name we want?
-	                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-	                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-	                        break;
-	                    }
-	                }
-	            }
-	            return cookieValue;
-	        }
-
-	        function uuidv4() {
-	          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-	            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-	            return v.toString(16);
-	          });
-	        }
-
-	        let device = getCookie('device')
-
-	        if (device == null || device == undefined){
-	            device = uuidv4()
-	        }
-
-	        document.cookie ='device=' + device + ";domain=;path=/"
-
-    	</script>
-
     </head>
 	<body>
 		<!-- HEADER -->
@@ -98,6 +56,7 @@
 					<ul class="header-links pull-right">
 					{% if user.is_authenticated %}
 						<li><a href=""><i class="fa fa-user-o"></i>Hello {{ user.username }}</a></li>
+						<li><a href="{% url 'order' %}">Orders</a></li>
 						<li><a href="{% url 'logout' %}">Logout</a></li>
 					{% else %}
 						<li><a href="{% url 'register' %}">Create Account</a></li>
@@ -149,12 +108,9 @@
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
-								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<a href="{% url 'cart' %}" ><i class="fa fa-shopping-cart"></i><div class="qty"> {% if cart_count > 0 %} {{ cart_count }} {% else %} 0 {% endif %} </div></a>
-										<a href="{% url 'cart' %}"><span>Your Cart</span></a>
-
-									</a>
+								<div>
+									<a href="{% url 'cart' %}" ><i class="fa fa-shopping-cart"></i><div class="qty"> {% if cart_count > 0 %} {{ cart_count }} {% else %} 0 {% endif %} </div></a>
+									<a href="{% url 'cart' %}"><span>Your Cart</span></a>
 								</div>
 								<!-- /Cart -->
 
@@ -273,7 +229,6 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
@@ -289,55 +244,41 @@
 						</div>
 					</div>
 					<!-- /section title -->
-
-					<!-- Products tab & slick -->
-					<div class="col-md-12">
-						<div class="row">
-							<div class="products-tabs">
-								<!-- tab -->
-								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-1">
-										<!-- product -->
-										{% for pro in pros %}
-											<div class="product">
-												<a href="{% url 'productview' pro.category.category pro.id %}">
-													<div class="product-img">
-														<img src="{{ pro.img.url }}" width="450" height="280" alt="">
-														<div class="product-label">
-															<span class="sale">-30%</span>
-															<span class="new">NEW</span>
-														</div>
-													</div>
-													<div class="product-body">
-														<p class="product-category">{{ pro.category }}</p>
-														<h3 class="product-name"><a href="{% url 'productview' pro.category.category pro.id %}">{{ pro.product }}</a></h3>
-														<h4 class="product-price">Rs: {{ pro.offer_price|intcomma }}.00 <del class="product-old-price"> Rs: {{ pro.original_price|intcomma }}.00</del></h4>
-														<div class="product-rating">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</div>
-													</div>
-												</a>
-											</div>
-										{% endfor %}
-										<!-- /product -->
-									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
-								</div>
-								<!-- /tab -->
-							</div>
-						</div>
-					</div>
-					<!-- Products tab & slick -->
 				</div>
-				<!-- /row -->
+				<!-- /row -->			
 			</div>
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
+		
+		<!-- Products Start -->
+
+		<div class="container-fluid pt-5">
+			<div class="text-center mb-4">
+				<h2 class="section-title px-5"><span class="px-2">New Products</span></h2>
+			</div>
+			<div class="row px-xl-5 pb-3">
+				{% for i in pros %}
+				<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+					<a href="{% url 'productview' i.category.category i.id %}">
+						<div class="card product-item border-0 mb-4">
+						   <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+						        <img class="img-fluid w-100" src="{{ i.img.url }}" alt="">
+						    </div>
+						    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+						        <h6 class="category">{{ i.category }}</h6>
+						        <h6 class="product-name">{{ i.product }}</h6>
+						        <div class="d-flex justify-content-center">
+									<h4 class="offer-price">Rs: {{ i.offer_price|intcomma }}.00 <del class="original-price"> Rs: {{ i.original_price|intcomma }}.00</del></h4>
+								</div>
+						    </div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<!-- Products End -->
 
 		<!-- HOT DEAL SECTION -->
 		<div id="hot-deal" class="section">
@@ -407,56 +348,41 @@
 						</div>
 					</div>
 					<!-- /section title -->
-
-					<!-- Products tab & slick -->
-					<div class="col-md-12">
-						<div class="row">
-							<div class="products-tabs">
-								<!-- tab -->
-								<div id="tab2" class="tab-pane fade in active">
-									<div class="products-slick" data-nav="#slick-nav-2">
-										<!-- product -->
-											{% for pro in pros %}
-												<div class="product">
-													<a href="{% url 'productview' pro.category.category pro.id %}">
-													<div class="product-img">
-														<img src="{{ pro.img.url }}" width="450" height="280" alt="">
-														<div class="product-label">
-															<span class="sale">-30%</span>
-															<span class="new">NEW</span>
-														</div>
-													</div>
-													<div class="product-body">
-														<p class="product-category">{{ pro.category }}</p>
-														<h3 class="product-name"><a href="{% url 'productview' pro.category.category pro.id %}">{{ pro.product }}</a></h3>
-														<h4 class="product-price">Rs: {{ pro.offer_price|intcomma }}.00 <del class="product-old-price"> Rs: {{ pro.original_price|intcomma }}.00</del></h4>
-														<div class="product-rating">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</div>
-													</div>
-													</a>
-												</div>
-											{% endfor %}
-											<!-- /product -->
-											<br><br><br>
-										<div id="slick-nav-2" class="products-slick-nav"></div>
-									</div>
-									<!-- /tab -->
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /Products tab & slick -->
 				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
+
+		<!-- Products Start -->
+
+		<div class="container-fluid pt-5">
+			<div class="text-center mb-4">
+				<h2 class="section-title px-5"><span class="px-2">Trending Products</span></h2>
+			</div>
+			<div class="row px-xl-5 pb-3">
+				{% for i in pros %}
+				<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+					<a href="{% url 'productview' i.category.category i.id %}">
+						<div class="card product-item border-0 mb-4">
+							<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+							   <img class="img-fluid w-100" src="{{ i.img.url }}" alt="">
+							</div>
+						    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+						        <h6 class="category">{{ i.category }}</h6>
+						        <h6 class="product-name">{{ i.product }}</h6>
+						        <div class="d-flex justify-content-center">
+									<h4 class="offer-price">Rs: {{ i.offer_price|intcomma }}.00 <del class="original-price"> Rs: {{ i.original_price|intcomma }}.00</del></h4>
+								</div>
+						    </div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<!-- Products End -->
 
 		
 		<!-- NEWSLETTER -->
@@ -536,10 +462,18 @@
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="\">My Account</a></li>
-									<li><a href="{% url 'cart' %}">View Cart</a></li>
-									<li><a href="{% url 'wishlist' %}">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
+								{% if user.is_authenticated %}
+                                    <li><a href="\">My Account</a></li>
+                                    <li><a href="{% url 'cart' %}">View Cart</a></li>
+                                    <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
+                                    <li><a href="{% url 'order' %}">Track My Order</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'login' %}">My Account</a></li>
+                                    <li><a href="{% url 'login' %}">View Cart</a></li>
+                                    <li><a href="{% url 'login' %}">Wishlist</a></li>
+                                    <li><a href="{% url 'login' %}">Track My Order</a></li>
+                                {% endif %}
+
 									<li><a href="/">Help</a></li>
 								</ul>
 							</div>
@@ -588,6 +522,7 @@
 		<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
 		<script src="{% static 'js/script.js' %}"></script>
+		<script src="{% static 'js/scripts.js' %}"></script>
 
 		<!-- Jquery Autocomplete -->
 		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -614,10 +549,10 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		
 		<script>
-            alertify.set('notifier','position', 'top-right');
-            {% for msg in messages %}
-                alertify.success('{{ msg }}');
-            {% endfor %}
+			alertify.set('notifier','position', 'top-right');
+	        {% for msg in messages %}
+	        	alertify.success('{{ msg }}');
+	        {% endfor %}
         </script>
 
 	</body>
