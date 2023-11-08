@@ -1,9 +1,161 @@
-{% extends 'base.html' %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-{% block content %}
-<br>
-		<!-- SECTION -->
+        <title>Electro</title>
+
+        <!-- Google font -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+        <!-- Slick -->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/slick-theme.css' %}"/>
+
+        <!-- nouislider -->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/nouislider.min.css' %}"/>
+
+        <!-- Font Awesome Icon -->
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
+
+        <!-- Alertify css -->
+
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+
+        <!-- Alertify css -->
+
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+        <style>
+            table, th, td {
+                border:3px solid black;
+                width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- HEADER -->
+        <header>
+            <!-- TOP HEADER -->
+            <div id="top-header">
+                <div class="container">
+                    <ul class="header-links pull-left">
+                        <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
+                        <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                    </ul>
+                    <ul class="header-links pull-right">
+						<li><a href=""><i class="fa fa-user-o"></i>Hello {{ user.username }}</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /TOP HEADER -->
+
+            <!-- MAIN HEADER -->
+            <div id="header">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="mobile">
+                        <!-- LOGO -->
+                        <div class="col-md-3">
+                            <div class="header-logo">
+                                <a href="#" class="logo">
+                                    <img src="{% static 'img/logo.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /LOGO -->
+
+                        <!-- SEARCH BAR -->
+                        <div class="col-md-6">
+                            <div class="header-search">
+                                <form>
+                                    <input class="input" placeholder="Search here">
+                                    <button class="search-btn">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /SEARCH BAR -->
+
+                        <!-- ACCOUNT -->
+                        <div class="col-md-3 clearfix">
+                            <div class="header-ctn">
+                                <!-- Wishlist -->
+                                <div>
+                                    <a href="{% url 'wishlist' %}">
+                                        <i class="fa fa-heart-o"></i>
+                                        <span>Your Wishlist</span>
+                                    </a>
+                                </div>
+                                <!-- /Wishlist -->
+
+                                <!-- Cart -->
+                                <div>
+                                    <a href="{% url 'cart' %}" ><i class="fa fa-shopping-cart"></i><div class="qty"> {% if cart_count > 0 %} {{ cart_count }} {% else %} 0 {% endif %} </div></a>
+                                    <a href="{% url 'cart' %}"><span>Your Cart</span></a>
+                                </div>
+                                <!-- /Cart -->
+
+                                <!-- Menu Toogle -->
+                                <div class="menu-toggle dropdown">
+                                    <a href="/" class="dropmenu"><i class="fa fa-bars"></i><span>Menu</span></a>
+                                    <div class="dropdown-content">
+                                    <a href="/">Home</a>
+                                    <a href="{% url 'mobile' %}">Mobile</a>
+                                    <a href="{% url 'laptop' %}">Laptop</a>
+                                    <a href="{% url 'cameras' %}">Cameras</a>
+                                    <a href="{% url 'gadgets' %}">Gadgets</a>
+                                </div>
+                                <!-- /Menu Toogle -->
+                            </div>
+                        </div>
+                        <!-- /ACCOUNT -->
+                    </div>
+                    <!-- row -->
+                </div>
+                <!-- container -->
+            </div>
+            <!-- /MAIN HEADER -->
+        </header>
+        <!-- /HEADER -->
+
+        <!-- NAVIGATION -->
+        <nav id="navigation">
+            <!-- container -->
+            <div class="container">
+                <!-- responsive-nav -->
+                <div id="responsive-nav">
+                    <!-- NAV -->
+                    <ul class="main-nav nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="{% url 'laptop' %}">Laptops</a></li>
+                        <li><a href="{% url 'mobile' %}">Mobiles</a></li>
+                        <li><a href="{% url 'cameras' %}">Cameras</a></li>
+                        <li><a href="{% url 'gadgets' %}">Gadgets</a></li>
+                        
+                    </ul>
+                    <!-- /NAV -->
+                </div>
+                <!-- /responsive-nav -->
+            </div>
+            <!-- /container -->
+        </nav>
+        <!-- /NAVIGATION -->
+        <br>
+        <!-- SECTION -->
 		<div class = "product_data">
 			<!-- container -->
 			<div class="container">
@@ -14,30 +166,43 @@
 							<div class="card-body">
 								<u><h2 class="text-center">Your Orders</h2></u>
 								<br>
-								<table class="table table-bordered" style="width: 100%;">
-									<thead>
-					    				<tr>
-					    					<th>Order Date</th>
-					    					<th>Tracking Number</th>
-					    					<th>Username</th>
-					    					<th>Total</th>
-					    					<th>Action</th>
-					    				</tr>
-					    			</thead>
-					    			<tbody>
-					    				{% for item in orders %}
+								{% if order %}
+									<table class="table table-bordered" style="width: 100%;">
+										<thead>
 						    				<tr>
-						    					<td> {{ item.created_at }} </td>
-						    					<td> {{ item.tracking_no }} </td>
-						    					<td> {{ item.first_name }} </td>
-						    					<td> {{ item.total_price }} </td>
-						    					<td>
-						    						<a href="{% url 'orderview' prod.category.category prod.id item.tracking_no %}" class="btn btn-primary">View</a>
-						    					</td>
+						    					<th>Username</th>
+						    					<th>Order Date</th>
+						    					<th>Product</th>
+						    					<th>Product Image</th>
+						    					<th>Tracking Number</th>
+						    					<th>Payment</th>				    			
+						    					<th>Total</th>
 						    				</tr>
-						    			{% endfor %} 
-					    			</tbody>
-					    		</table>
+						    			</thead>
+						    			<tbody>
+						    				{% for item in order %}
+							    				<tr>
+							    					<td> {{ item.user.username }} </td>
+							    					<td> {{ item.order.created_at }} </td>
+							    					<td> {{ item.product.product }}</td>
+							    					<td>
+										    			<img src="{{ item.product.img.url }}" height="75px" width="75px">
+										    		</td>
+							    					<td> {{ item.order.tracking_no }} </td>
+							    					<td> {{ item.order.payment_mode }} </td>
+							    					<td> {{ item.order.total_price }} </td>
+							    					
+							    				</tr>
+							    			{% endfor %} 
+						    			</tbody>
+						    		</table>
+
+						    		<br>
+						    	{% else %}
+						    	<br>
+						    		<h3 class="text-center">Looks like you haven't placed an order yet <span class="" style="color:red;">!!!</span></h3>
+						    	<br>
+						    	{% endif %}
 							</div>
 						</div>
 					</div>
@@ -48,5 +213,125 @@
 		</div>
 		<!-- /SECTION -->
 
+        <!-- NEWSLETTER -->
+        <div id="newsletter" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /NEWSLETTER -->
 
-{% endblock content %}
+        <!-- FOOTER -->
+        <footer id="footer">
+            <!-- top footer -->
+            <div class="section">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-md-3 col-xs-6">
+                            <div class="footer">
+                                <h3 class="footer-title">About Us</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                                <ul class="footer-links">
+                                    <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+                                    <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                                    <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-xs-6">
+                            <div class="footer">
+                                <h3 class="footer-title">Categories</h3>
+                                <ul class="footer-links">
+                                    <li><a href="#hot-deal">Hot deals</a></li>
+                                    <li><a href="{% url 'laptop' %}">Laptops</a></li>
+                                    <li><a href="{% url 'mobile' %}">Smartphones</a></li>
+                                    <li><a href="{% url 'cameras' %}">Cameras</a></li>
+                                    <li><a href="{% url 'gadgets' %}">Gadgets</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="clearfix visible-xs"></div>
+
+
+
+                        <div class="col-md-3 col-xs-6">
+                            <div class="footer">
+                                <h3 class="footer-title">Service</h3>
+                                <ul class="footer-links">
+                                    <li><a href="\">My Account</a></li>
+                                    <li><a href="{% url 'cart' %}">View Cart</a></li>
+                                    <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
+                                    <li><a href="{% url 'order' %}">Track My Order</a></li>
+                                    <li><a href="/">Help</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /container -->
+            </div>
+            <!-- /top footer -->
+
+            <!-- bottom footer -->
+            <div id="bottom-footer" class="section">
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <ul class="footer-payments">
+                                <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                                <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                                <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                                <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                                <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                                <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                            </ul>
+                            <span class="copyright">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://rohith404.github.io/Personal-Website/" target="_blank">Rohith</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </span>
+                        </div>
+                    </div>
+                        <!-- /row -->
+                </div>
+                <!-- /container -->
+            </div>
+            <!-- /bottom footer -->
+        </footer>
+        <!-- /FOOTER -->
+
+        <!-- jQuery Plugins -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/slick.min.js' %}"></script>
+        <script src="{% static 'js/nouislider.min.js' %}"></script>
+        <script src="{% static 'js/jquery.zoom.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/script.js' %}"></script>
+        <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+        <!-- Alertify Js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+        <script>
+            alertify.set('notifier','position', 'top-right');
+            {% for msg in messages %}
+                alertify.success('{{ msg }}');
+            {% endfor %}
+        </script>
+    </body>
+</html>
