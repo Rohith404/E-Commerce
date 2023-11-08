@@ -12,10 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
-from decouple import config
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY=config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-l4u&7@(qv-bti-egasy61%u#bhli&x2-eiu(^y(hsa5bxbf0f('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 USE_L10N = True
@@ -143,7 +139,7 @@ WSGI_APPLICATION = 'Electro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Electro',
+        'NAME': 'electro',
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': '6254',
@@ -226,5 +222,5 @@ EMAIL_HOST_PASSWORD = 'muyeijdsyavpjbsp'
 # CART_SESSION_ID = 'cart'
 
 # Razorpay 
-RAZOR_KEY_ID = config('RAZOR_KEY_ID')
-RAZOR_KEY_SECRET = config('RAZOR_KEY_SECRET')
+RAZOR_KEY_ID = 'rzp_test_vl3K2w18t3KZTJ'
+RAZOR_KEY_SECRET = 'Tq2orPaZZWRvfDHz45ChClcn'
