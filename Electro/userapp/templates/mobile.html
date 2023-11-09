@@ -3,56 +3,38 @@
 {% load humanize %}
 
 {% block content %}
+			
+	<div class="section">
+		<!-- Products Start -->
 
-		<!-- Products tab & slick -->
-				<section>
-					<div class="col-md-12">
-						<div class="row">
-							<div class="products-tabs">
-								<!-- tab -->
-								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-1">
-										<!-- product -->
-										{% for mob in mobs %}
-										<div class="product">
-											<a href="{% url 'productview' mob.category.category mob.id %}">
-											<div class="product-img">
-												<img src="{{ mob.img.url }}" width="450" height="280" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">{{ mob.category }}</p>
-												<h3 class="product-name"><a href="{% url 'productview' mob.category.category mob.id %}">{{ mob.product }}</a></h3>
-												<h4 class="product-price">Rs: {{ mob.offer_price|intcomma }}.00  <del class="product-old-price"> Rs: {{ mob.original_price|intcomma }}.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><a href="{% url 'productview' mob.category.category mob.id %}"><i class="fa fa-exchange"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											</a>
-										</div>
-										{% endfor %}
-										<!-- /product -->
-									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
-								</div>
-								<!-- /tab -->
+		<div class="container-fluid pt-5">
+			<div class="text-center mb-4">
+				<h2 class="section-title px-5"><span class="px-2"><u>Mobiles</u></span></h2>
+			</div>
+			<div class="row px-xl-5 pb-3">
+				{% for i in mobs %}
+				<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+					<a href="{% url 'productview' i.category.category i.id %}">
+						<div class="card product-item border-0 mb-4">
+					   		<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+					        		<img class="img-fluid w-100" src="{{ i.img.url }}" alt="">
+					    		</div>
+					    		<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+					        		<h6 class="category">{{ i.category }}</h6>
+					        		<h6 class="product-name">{{ i.product }}</h6>
+					        		<div class="d-flex justify-content-center">
+									<h4 class="offer-price">Rs: {{ i.offer_price|intcomma }}.00 <del class="original-price"> Rs: {{ i.original_price|intcomma }}.00</del></h4>
 							</div>
 						</div>
 					</div>
-					<!-- Products tab & slick -->
-				</section>
-				<br><br><br>
-		<!-- /SECTION -->
-		<br><br><br>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<!-- Products End -->
+
+	</div>									
+	<br><br><br>
+
 {% endblock content %}
