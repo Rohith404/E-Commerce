@@ -3,54 +3,38 @@
 {% load humanize %}
 
 {% block content %}
+	
+	<div class="section">
+		<!-- Products Start -->
 
-		<!-- Products tab & slick -->
-					<div class="col-md-12">
-						<div class="row">
-							<div class="products-tabs">
-								<!-- tab -->
-								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-1">
-										<!-- product -->
-										{% for gad in gads %}
-										<div class="product">
-											<a href="{% url 'productview' gad.category.category gad.id %}">
-											<div class="product-img">
-												<img src="{{ gad.img.url }}" width="450" height="280" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">{{ gad.category }}</p>
-												<h3 class="product-name"><a href="{% url 'productview' gad.category.category gad.id %}">{{ gad.product }}</a></h3>
-												<h4 class="product-price">Rs: {{ gad.offer_price|intcomma }}.00  <del class="product-old-price">Rs: {{ gad.original_price|intcomma }}.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-											</a>
-										</div>
-										{% endfor %}
-										<!-- /product -->
-									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
+		<div class="container-fluid pt-5">
+			<div class="text-center mb-4">
+				<h2 class="section-title px-5"><span class="px-2"><u>Gadgets</u></span></h2>
+			</div>
+			<div class="row px-xl-5 pb-3">
+				{% for i in gads %}
+				<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+					<a href="{% url 'productview' i.category.category i.id %}">
+						<div class="card product-item border-0 mb-4">
+							<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+					        		<img class="img-fluid w-100" src="{{ i.img.url }}" alt="">
+					    		</div>
+					    		<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+					        		<h6 class="category">{{ i.category }}</h6>
+					        		<h6 class="product-name">{{ i.product }}</h6>
+					        		<div class="d-flex justify-content-center">
+									<h4 class="offer-price">Rs: {{ i.offer_price|intcomma }}.00 <del class="original-price"> Rs: {{ i.original_price|intcomma }}.00</del></h4>
 								</div>
-								<!-- /tab -->
 							</div>
 						</div>
-					</div>
-					<!-- Products tab & slick -->
+					</a>
 				</div>
-				<!-- /row -->
+				{% endfor %}
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /SECTION -->
-		<br><br><br>
+		<!-- Products End -->
+
+	</div>									
+	<br><br><br>
+
 {% endblock content %}
