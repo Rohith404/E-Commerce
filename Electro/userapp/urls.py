@@ -3,10 +3,10 @@ from . import views
 
 urlpatterns = [
     # Login and Register
-	path("",views.index , name = "index"),
-	path("login",views.login, name = "login"),
-	path("register",views.register, name = "register"),
-	path("logout",views.logout, name = "logout"),
+    path("",views.index , name = "index"),
+    path("login",views.login, name = "login"),
+    path("register",views.register, name = "register"),
+    path("logout",views.logout, name = "logout"),
     path('forget-password/' , views.ForgetPassword , name="forget-password"),
     path('change-password/<token>/' , views.ChangePassword , name="change-password"),
 
@@ -35,9 +35,5 @@ urlpatterns = [
     path("<str:cate_category>/<str:prod_id>/placeorder", views.placeorder, name = "placeorder"),
 
     #orderView
-    path("<str:cate_category>/<str:prod_id>/orders", views.orders, name = "orders"),
-    path("<str:cate_category>/<str:prod_id>/<str:t_no>/orderview", views.orderview, name = "orderview"),
-
-    #searchbar
-    path("product-list", views.productlist, name = "productlist"),
+    path("order/", views.order, name = "order"),
 ]
