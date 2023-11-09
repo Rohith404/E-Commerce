@@ -10,7 +10,6 @@ from django.contrib import messages
 from django.conf import settings
 from .models import Order
 from .models import *
-import razorpay
 import random
 
 def register(request):
@@ -364,22 +363,7 @@ def placeorder(request, cate_category, prod_id):
     return redirect('/')
 
 @login_required(login_url = 'login')
-def orders(request, cate_category, prod_id):
-    orders = Order.objects.filter(user = request.user)
-    prod = Product.objects.filter(id = prod_id).first()
-    context = {'orders':orders, 'prod' : prod}
-    return render(request, 'orders.html', context)
-
-@login_required(login_url = 'login')
-def orderview(request,cate_category, prod_id, t_no):
-    order = Order.objects.filter(tracking_no = t_no).filter(user = request.user).first()
-    orderitems = OrderItem.objects.filter(order = order)
-    userprofile = Profile.objects.filter(user = request.user).first()
-    context = {'order' : order, 'orderitems' : orderitems, 'userprofile' : userprofile}
-    return render(request, 'orderview.html', context)
-
-def productlist(request):
-    products = Product.objects.filter(product = 10).values_list('product', flat = True)
-    productsList = list(products)
-
-    return JsonResponse(productsList, safe = False)
+def order(request):
+    order = OrderItem.objects.filter(user = request.user)
+    context = {'order':order}
+    return render(request, 'order.html', context)
