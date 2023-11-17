@@ -10,13 +10,13 @@
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
-				<div class="row product_data">
+				<div class="product_data">
 					<u><h2 class="text-center">Wishlist</h2></u>
 					<br>
 					{% if wish %}
 
 							{% for prod in wish %}
-								<div class="row text-center product_data"><a href="{% url 'productview' prod.product.category.category prod.product.id %}">
+								<div class="text-center product_data"><a href="{% url 'productview' prod.product.category.category prod.product.id %}">
 									<div class="col-md-1 my-auto">
 									</div>
 									<br>
