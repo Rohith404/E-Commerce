@@ -9,70 +9,59 @@
 		<div class = "product_data">
 			<!-- container -->
 			<div class="container">
-				<!-- row -->
-				<div class="row product_data"><br>
-					<div class="col-md-12">
-						<div class="card shadow">
-							<div class="card-body">
-								<u><h2 class="text-center">Shopping Cart</h2></u>
-								<br>
-								{% if cart %}
+				<div class="card shadow">
+					<div class="card-body">
+						<u><h2 class="text-center">Shopping Cart</h2></u>
+						<br>
+						{% if cart %}
 
-										{% for prod in cart %}
-											<div class="row text-center product_data" id = "delete"><a href="{% url 'productview' prod.product.category.category prod.product.id %}">
+								{% for prod in cart %}
+									<div class="text-center product_data" id = "delete"><a href="{% url 'productview' prod.product.category.category prod.product.id %}">
 												
-												<div class="col-md-2 my-auto">
-													<img src="{{ prod.product.img.url }}" height="70px" width="100px" >
-												</div>
-												<br>
-												<div class="col-md-2 my-auto">
-													<h6> {{ prod.product.product }} </h6>
-												</div>
+										<div class="col-md-2 my-auto">
+											<img src="{{ prod.product.img.url }}" height="70px" width="100px" >
+										</div>
+										<br>
+										<div class="col-md-2 my-auto">
+											<h6> {{ prod.product.product }} </h6>
+										</div>
 
-												<div class="col-md-2 my-auto">
-													<h4>Rs: {{ prod.product.offer_price|intcomma }}.00 </h4>
+										<div class="col-md-2 my-auto">
+											<h4>Rs: {{ prod.product.offer_price|intcomma }}.00 </h4>
+										</div>
+										<div class="col-md-3 my-auto product_data quantity">
+											<input type="hidden" class="pros_id" value="{{ prod.product_id }}">
+											{% csrf_token %}
+											{% if prod.product.quantity >= prod.quantity %}
+												<div class="qty-label quantity">
+													Quantity
+													<div class="input-number quantity">
+														<span class="qty-up increment-btn ChangeQuantity">+</span>
+														<input type="number" class="form-control qty-input text-center" value="{{ prod.quantity}}">
+														<span class="qty-down decrement-btn ChangeQuantity">-</span>
+													</div>
 												</div>
-												<div class="col-md-3 my-auto product_data quantity">
-													<input type="hidden" class="pros_id" value="{{ prod.product_id }}">
-													{% csrf_token %}
-													{% if prod.product.quantity >= prod.quantity %}
-														<div class="qty-label quantity">
-														Quantity
-															<div class="input-number quantity">
-																<span class="qty-up increment-btn ChangeQuantity">+</span>
-																<input type="number" class="form-control qty-input text-center" value="{{ prod.quantity}}">
-																<span class="qty-down decrement-btn ChangeQuantity">-</span>
-															</div>
-														</div>
-													{% else %}
-														<h4> Out of Stock </h4>
-													{% endif %}
-												</div>
+											{% else %}
+												<h4> Out of Stock </h4>
+											{% endif %}
+										</div>
 
-												<div class="col-md-2 my-auto">
-													<input type="hidden" class="pros_id" value="{{ prod.product_id }}">
-													{% csrf_token %}
-													<button name = "delete" class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Remove</button>			
-												</div>
-											</a>
-											</div>
-										{% endfor %}
-										<br><br>
-										<div class="col-md-9"></div>
-										
-										
-										
+										<div class="col-md-2 my-auto">
+											<input type="hidden" class="pros_id" value="{{ prod.product_id }}">
+												{% csrf_token %}
+											<button name = "delete" class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Remove</button>			
+										</div>
+									</a>
+									</div>
+								{% endfor %}
 
-								{% else %}
+						{% else %}
 
-									<h4>Your Cart Is Empty</h4>
+							<h4>Your Cart Is Empty</h4>
 
-								{% endif %}
-							</div>
-						</div>
+						{% endif %}
 					</div>
 				</div>
-				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
